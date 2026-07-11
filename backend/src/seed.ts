@@ -25,16 +25,25 @@ async function seed() {
 
   const dataSourceOptions =
     dbType === 'postgres'
-      ? {
-          type: 'postgres' as const,
-          host: process.env.DB_HOST || 'localhost',
-          port: parseInt(process.env.DB_PORT || '5432'),
-          username: process.env.DB_USERNAME || 'marketplace',
-          password: process.env.DB_PASSWORD || 'marketplace_secret',
-          database: process.env.DB_DATABASE || 'marketplace',
-          entities: ALL_ENTITIES,
-          synchronize: true,
-        }
+      ? process.env.DATABASE_URL
+        ? {
+            type: 'postgres' as const,
+            url: process.env.DATABASE_URL,
+            ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
+            entities: ALL_ENTITIES,
+            synchronize: true,
+          }
+        : {
+            type: 'postgres' as const,
+            host: process.env.DB_HOST || 'localhost',
+            port: parseInt(process.env.DB_PORT || '5432'),
+            username: process.env.DB_USERNAME || 'marketplace',
+            password: process.env.DB_PASSWORD || 'marketplace_secret',
+            database: process.env.DB_DATABASE || 'marketplace',
+            ssl: process.env.DB_SSL === 'false' ? false : { rejectUnauthorized: false },
+            entities: ALL_ENTITIES,
+            synchronize: true,
+          }
       : {
           type: 'sqljs' as const,
           location: join(process.cwd(), process.env.DB_PATH || 'marketplace.db'),
