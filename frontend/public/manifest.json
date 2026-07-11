@@ -1,0 +1,17 @@
+{
+  "name": "LakMarket",
+  "short_name": "LakMarket",
+  "description": "Бозори онлайн — харид ва фурӯш",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f7fc",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

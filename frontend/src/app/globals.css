@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-secondary text-text antialiased;
+    min-height: 100dvh;
+  }
+
+  .dark body,
+  html.dark body {
+    @apply bg-surface-dark text-gray-100;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-border-dark;
+  }
+}
+
+@layer components {
+  .app-container {
+    @apply mx-auto w-full max-w-7xl px-3 sm:px-4 lg:px-6;
+  }
+
+  .product-grid {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-2.5 lg:gap-3;
+  }
+
+  .ozon-product-grid {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3;
+  }
+
+  /* Ҷустуҷӯ мисли Ozon — фақат тугмаи 🔍 кабуд, дохил сафед */
+  .ozon-search {
+    @apply flex items-stretch min-w-0 rounded-full bg-white border border-[#E0E4EB] overflow-hidden;
+    box-shadow: none;
+  }
+
+  .ozon-search:focus-within {
+    border-color: #E0E4EB;
+    box-shadow: none;
+    outline: none;
+  }
+
+  .ozon-search-input {
+    @apply flex-1 min-w-0 h-full px-4 text-sm bg-white text-text border-0 shadow-none;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .ozon-search-input:focus,
+  .ozon-search-input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .ozon-search-input::placeholder {
+    @apply text-[#9CA3AF];
+  }
+
+  .ozon-search-btn {
+    @apply h-full w-11 sm:w-12 shrink-0 flex items-center justify-center text-white border-0 cursor-pointer transition-colors;
+    background-color: #005BFF;
+  }
+
+  .ozon-search-btn:hover {
+    background-color: #0050E0;
+  }
+
+  .ozon-card {
+    @apply rounded-2xl bg-white border border-border/50 overflow-hidden transition-shadow duration-200
+      hover:shadow-card dark:bg-surface-dark-secondary dark:border-border-dark;
+  }
+
+  .store-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3;
+  }
+
+  /* Buttons — 48px height, rounded, semi-bold */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-btn h-btn px-5 text-sm font-semibold
+      transition-all duration-200 active:scale-[0.98]
+      disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .btn-brand,
+  .btn-primary {
+    @apply btn bg-gradient-primary text-white shadow-soft
+      hover:shadow-float hover:brightness-105;
+  }
+
+  .btn-accent {
+    @apply btn bg-gradient-gold text-white shadow-soft hover:shadow-card hover:brightness-105;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-primary hover:bg-primary-50
+      dark:hover:bg-surface-dark-secondary;
+  }
+
+  .btn-outline-brand {
+    @apply btn border border-border text-primary bg-white
+      hover:bg-primary-50 dark:bg-surface-dark-secondary dark:border-border-dark dark:text-primary-300;
+  }
+
+  .btn-secondary {
+    @apply btn bg-surface-secondary text-text hover:bg-gray-100
+      dark:bg-surface-dark-secondary dark:text-gray-200;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger text-white hover:bg-danger-600;
+  }
+
+  /* Inputs — large, rounded, modern */
+  .input {
+    @apply w-full rounded-input border border-border bg-white px-4 py-3.5 text-sm
+      text-text transition-all duration-200 placeholder:text-text-muted
+      focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10
+      dark:bg-surface-dark-secondary dark:border-border-dark dark:text-gray-100;
+  }
+
+  /* Cards — 18px radius, soft shadow */
+  .card {
+    @apply rounded-card bg-white shadow-soft border border-border/60
+      dark:bg-surface-dark-secondary dark:border-border-dark dark:shadow-dark-card;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-200 hover:shadow-card hover:-translate-y-0.5;
+  }
+
+  .glass {
+    @apply bg-white border-b border-border/60
+      dark:bg-surface-dark dark:border-border-dark;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-2xs font-semibold;
+  }
+
+  .badge-brand { @apply badge bg-primary-50 text-primary dark:bg-primary/20 dark:text-primary-300; }
+  .badge-accent { @apply badge bg-warning-50 text-warning dark:bg-warning/20; }
+  .badge-success { @apply badge bg-success-50 text-success-600 dark:bg-success/20 dark:text-success; }
+  .badge-danger { @apply badge bg-danger-50 text-danger dark:bg-danger/20 dark:text-danger; }
+
+  .section-title {
+    @apply text-base font-bold text-text tracking-tight dark:text-gray-100;
+  }
+
+  .section-subtitle {
+    @apply text-sm text-text-secondary dark:text-gray-400;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  .icon-box {
+    @apply flex items-center justify-center rounded-xl;
+  }
+
+  .icon-box-brand { @apply icon-box bg-primary-50 text-primary dark:bg-primary/20; }
+  .icon-box-accent { @apply icon-box bg-secondary-50 text-secondary dark:bg-secondary/20; }
+
+  .shimmer-bg {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+
+  .dark .shimmer-bg {
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+  }
+
+  .safe-bottom {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (min-width: 1024px) {
+    .safe-bottom {
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .price-discount {
+    @apply font-bold text-accent bg-gradient-price bg-clip-text text-transparent;
+  }
+
+  .price-old {
+    @apply text-text-muted line-through text-sm font-medium;
+  }
+}
+
+@layer utilities {
+  .stagger-1 { animation-delay: 0.04s; }
+  .stagger-2 { animation-delay: 0.08s; }
+  .stagger-3 { animation-delay: 0.12s; }
+  .stagger-4 { animation-delay: 0.16s; }
+  .stagger-5 { animation-delay: 0.2s; }
+  .stagger-6 { animation-delay: 0.24s; }
+
+  /* ─── Premium Icon System (TZ) ─── */
+  .icon-base {
+    @apply transition-all duration-200;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .icon-variant-default { @apply text-[#6B7280] dark:text-gray-400; }
+  .icon-variant-primary { @apply text-primary dark:text-primary-300; }
+  .icon-variant-active { @apply text-primary dark:text-primary-300; }
+  .icon-variant-secondary { @apply text-text-secondary dark:text-gray-400; }
+  .icon-variant-success { @apply text-success dark:text-success; }
+  .icon-variant-warning { @apply text-warning dark:text-warning; }
+  .icon-variant-danger { @apply text-danger dark:text-danger; }
+  .icon-variant-disabled { @apply text-gray-300 dark:text-gray-600; }
+
+  .icon-filled { fill: currentColor; stroke: currentColor; }
+
+  .icon-btn {
+    @apply relative inline-flex items-center justify-center rounded-xl
+      h-10 w-10 text-[#6B7280] transition-all duration-200
+      hover:scale-105 hover:text-primary hover:bg-primary-50
+      active:scale-95
+      dark:hover:bg-primary/10 dark:hover:text-primary-300;
+  }
+
+  .nav-active-label { @apply text-primary font-semibold; }
+  .nav-active-pill { @apply bg-primary-50 text-primary dark:bg-primary/20 dark:text-primary-300; }
+
+  .icon-btn-active {
+    @apply text-primary bg-primary-50 dark:bg-primary/15 dark:text-primary-300;
+  }
+
+  .icon-btn-disabled {
+    @apply opacity-40 pointer-events-none;
+  }
+
+  .icon-badge {
+    @apply absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center
+      rounded-full bg-danger px-1 text-[9px] font-bold text-white;
+  }
+
+  .icon-badge-dot {
+    @apply absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-danger;
+  }
+
+  /* Animations TZ §5 */
+  @keyframes iconBellShake {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(14deg); }
+    40% { transform: rotate(-12deg); }
+    60% { transform: rotate(8deg); }
+    80% { transform: rotate(-4deg); }
+  }
+
+  @keyframes iconCartBounce {
+    0%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-3px); }
+    60% { transform: translateY(1px); }
+  }
+
+  @keyframes iconHeartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+  }
+
+  .icon-anim-bell { animation: iconBellShake 0.5s ease-in-out; }
+  .icon-anim-cart { animation: iconCartBounce 0.4s ease-out; }
+  .icon-anim-favorite { animation: iconHeartPop 0.35s ease-out; }
+  .icon-anim-spin { animation: spin 1s linear infinite; }
+  .icon-anim-success { @apply text-success; animation: iconHeartPop 0.4s ease-out; }
+  .icon-anim-fade { animation: fadeIn 0.3s ease-out reverse; opacity: 0; }
+}
