@@ -57,7 +57,16 @@ export default function StoreCard({
       style={{ animationDelay: `${index * 0.04}s`, ...style }}
     >
       {coords && (
-        <StoreMiniMap lat={coords.lat} lng={coords.lng} label={name} height={88} className="rounded-none border-0 border-b border-border/60" />
+        <div className="hidden sm:block">
+          <StoreMiniMap
+            lat={coords.lat}
+            lng={coords.lng}
+            label={name}
+            height={88}
+            mode="card"
+            className="rounded-none border-0 border-b border-border/60"
+          />
+        </div>
       )}
 
       <div className="flex min-h-[88px] flex-1">

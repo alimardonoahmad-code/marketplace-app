@@ -13,7 +13,6 @@ import { Store as StoreType } from '@/types';
 import StoreCard from '@/components/stores/StoreCard';
 import SellerStepPromos from '@/components/stores/SellerStepPromos';
 import { getStoreCitiesFromData } from '@/lib/store-search';
-import { BRAND } from '@/lib/brand-theme';
 
 function StoresPageInner() {
   const router = useRouter();
@@ -62,17 +61,13 @@ function StoresPageInner() {
   };
 
   return (
-    <div className="pb-8">
-      <section className={clsx('relative overflow-hidden bg-gradient-to-br text-white', BRAND.hero)}>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.12),transparent_55%)]" />
-        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary-400/20 rounded-full blur-3xl" />
-        <div className="absolute top-10 left-10 w-40 h-40 bg-primary-400/10 rounded-full blur-2xl" />
-
-        <div className="app-container relative py-8 lg:py-12">
+    <div className="pb-8 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
+      <section className="ozon-promo-bar">
+        <div className="app-container relative py-6 lg:py-8">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="badge bg-white/15 text-white text-[10px] backdrop-blur-sm tracking-wider">
-                PREMIUM STORES
+            <div className="flex items-center gap-2 mb-3">
+              <span className="badge bg-white/20 text-white text-[10px] font-bold tracking-wider">
+                MARKET STORES
               </span>
             </div>
             <h1 className="text-2xl lg:text-4xl font-black leading-tight">
