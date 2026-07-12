@@ -57,12 +57,28 @@ const ALL_ENTITIES = [
         const dbType = config.get<string>('DB_TYPE', 'sqlite');
 
         if (dbType === 'postgres') {
-          const databaseUrl = config.get<string>('DATABASE_URL');
           const ssl =
             config.get<string>('DB_SSL') === 'false'
               ? false
               : { rejectUnauthorized: false };
 
+          const dbHost = config.get<string>('DB_HOST');
+          if (dbHost) {
+            return {
+              type: 'postgres' as const,
+              host: dbHost,
+              port: config.get<number>('DB_PORT', 5432),
+              username: config.get<string>('DB_USERNAME', 'marketplace'),
+              password: config.get<string>('DB_PASSWORD', 'marketplace_secret'),
+              database: config.get<string>('DB_DATABASE', 'marketplace'),
+              ssl,
+              entities: ALL_ENTITIES,
+              synchronize: true,
+              logging: config.get('NODE_ENV') === 'development',
+            };
+          }
+
+          const databaseUrl = config.get<string>('DATABASE_URL');
           if (databaseUrl) {
             return {
               type: 'postgres' as const,
@@ -76,7 +92,7 @@ const ALL_ENTITIES = [
 
           return {
             type: 'postgres' as const,
-            host: config.get<string>('DB_HOST', 'localhost'),
+            host: 'localhost',
             port: config.get<number>('DB_PORT', 5432),
             username: config.get<string>('DB_USERNAME', 'marketplace'),
             password: config.get<string>('DB_PASSWORD', 'marketplace_secret'),
