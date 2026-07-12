@@ -67,7 +67,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <PwaRegister />
         <PwaInstallBanner />
         <TopBar />
-        <main className="flex-1 safe-bottom">{children}</main>
+        <main className="flex-1 safe-bottom app-main-with-header">{children}</main>
         <BottomNav />
       </div>
     </WishlistProvider>

@@ -58,7 +58,7 @@ export default function BottomNav() {
     : shopNav;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E8ECF2] shadow-[0_-4px_20px_rgba(0,26,52,0.06)] pb-[env(safe-area-inset-bottom,0px)] lg:hidden dark:bg-surface-dark-secondary dark:border-border-dark" aria-label="Навигатсияи асосӣ">
+    <nav className="app-chrome-bottom fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-[#E8ECF2] shadow-[0_-4px_20px_rgba(0,26,52,0.06)] pb-[env(safe-area-inset-bottom,0px)] lg:hidden dark:bg-surface-dark-secondary dark:border-border-dark" aria-label="Навигатсияи асосӣ">
       <div className="app-container">
         <div className="flex items-center justify-around h-[4rem]">
           {nav.map(({ href, icon, label, badge, accent }) => {

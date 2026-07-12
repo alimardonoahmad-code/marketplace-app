@@ -218,6 +218,22 @@
     padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
   }
 
+  .app-main-with-header {
+    padding-top: var(--app-header-h, 8.5rem);
+  }
+
+  .app-chrome-top {
+    @apply fixed top-0 left-0 right-0 z-[100] bg-white dark:bg-surface-dark-secondary;
+    padding-top: env(safe-area-inset-top, 0px);
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  .app-chrome-bottom {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
   @media (min-width: 1024px) {
     .safe-bottom {
       padding-bottom: 1.5rem;

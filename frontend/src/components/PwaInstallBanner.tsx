@@ -48,7 +48,7 @@ export default function PwaInstallBanner() {
   if (installed || hidden || !deferred) return null;
 
   return (
-    <div className="ozon-install-banner">
+    <div className="fixed left-0 right-0 z-[90] ozon-install-banner bottom-[calc(4rem+env(safe-area-inset-bottom,0px))] lg:hidden">
       <div className="app-container flex items-center gap-3 py-2.5">
         <img src="/icon-192.png" alt="" className="h-10 w-10 rounded-xl shrink-0 shadow-soft" />
         <div className="flex-1 min-w-0">

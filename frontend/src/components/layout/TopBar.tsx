@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense, type RefObject } from 'react';
 import { LayoutGrid, User, Package, Heart, ShoppingCart } from 'lucide-react';
 import clsx from 'clsx';
 import { useAuthStore, useCartStore, useAppStore } from '@/store/auth';
@@ -13,6 +13,26 @@ import OzonLogo from './OzonLogo';
 import OzonPromoBar from './OzonPromoBar';
 
 const HIDE_NAV = ['/login', '/register'];
+
+function useHeaderHeight(ref: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const update = () => {
+      document.documentElement.style.setProperty('--app-header-h', `${el.offsetHeight}px`);
+    };
+
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener('resize', update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, [ref]);
+}
 
 function HeaderAction({
   href, icon: Icon, label, badge, className = '',
@@ -41,13 +61,14 @@ function HeaderAction({
 
 export default function TopBar() {
   return (
-    <Suspense fallback={<header className="sticky top-0 z-50 h-14 bg-white border-b border-border/60" />}>
+    <Suspense fallback={<header className="app-chrome-top h-14 border-b border-border/60" />}>
       <TopBarInner />
     </Suspense>
   );
 }
 
 function TopBarInner() {
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -57,6 +78,8 @@ function TopBarInner() {
   const [search, setSearch] = useState('');
 
   const isSell = mode === 'sell';
+
+  useHeaderHeight(headerRef);
 
   useEffect(() => {
     if (pathname.startsWith('/products')) {
@@ -90,7 +113,7 @@ function TopBarInner() {
 
   if (isSell) {
     return (
-      <header className="sticky top-0 z-50 bg-white border-b border-border/60 shadow-soft">
+      <header ref={headerRef} className="app-chrome-top border-b border-border/60 shadow-soft">
         <div className="app-container flex h-14 items-center justify-between gap-3">
           <OzonLogo size="sm" />
           <span className="text-sm font-semibold text-text-secondary">Режими фурӯш</span>
@@ -103,10 +126,12 @@ function TopBarInner() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-border/60 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
-      <OzonPromoBar />
+    <header ref={headerRef} className="app-chrome-top border-b border-border/60 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
+      <div className="hidden sm:block">
+        <OzonPromoBar />
+      </div>
       <div className="app-container">
-        <div className="flex items-center gap-2 sm:gap-3 py-2.5 lg:py-3">
+        <div className="flex items-center gap-2 sm:gap-3 py-2 lg:py-2.5">
           <OzonLogo />
 
           <Link
@@ -122,10 +147,10 @@ function TopBarInner() {
             onChange={setSearch}
             onSubmit={onSearch}
             placeholder="Искать на Market"
-            className="flex-1 max-w-3xl"
+            className="hidden sm:block flex-1 max-w-3xl"
           />
 
-          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0 ml-auto sm:ml-0">
             <HeaderAction
               href={user ? '/profile' : getLoginUrl('/profile')}
               icon={User}
@@ -134,12 +159,12 @@ function TopBarInner() {
             {user && (
               <HeaderAction href="/orders" icon={Package} label="Фармоиш" className="hidden md:flex" />
             )}
-            <HeaderAction href="/wishlist" icon={Heart} label="Дӯст" className="hidden sm:flex" />
+            <HeaderAction href="/wishlist" icon={Heart} label="Дӯст" />
             <HeaderAction href="/cart" icon={ShoppingCart} label="Сабад" badge={itemCount} />
           </div>
         </div>
 
-        <div className="flex sm:hidden gap-2 pb-2.5">
+        <div className="flex sm:hidden gap-2 pb-2">
           <Link
             href="/categories"
             className="inline-flex items-center gap-1.5 bg-primary text-white rounded-xl px-3 h-10 text-xs font-bold shrink-0"
