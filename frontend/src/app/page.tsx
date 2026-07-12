@@ -56,11 +56,12 @@ export default function HomePage() {
       )}
 
       <ProductRail
-        title="Тахфифҳои имрӯз"
-        subtitle="Нархҳои хос — то 50% тахфиф"
+        title="Тахфифҳои интихобшуда"
+        subtitle="Маҳсулоти махсус бо нархи хуб"
         href="/products?hasDiscount=true"
         icon="flash-sale"
-        fetchUrl="/products?hasDiscount=true&limit=12&sortBy=rating&sortOrder=DESC"
+        fetchUrl="/products?hasDiscount=true&limit=8&sortBy=rating&sortOrder=DESC"
+        limit={6}
         onAddToCart={handleAddToCart}
       />
 

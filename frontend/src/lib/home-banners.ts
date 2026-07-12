@@ -10,9 +10,9 @@ export interface HomeBanner {
 export const HOME_BANNERS: HomeBanner[] = [
   {
     id: 'deals',
-    title: 'Вот это скидки!',
-    sub: 'Тахфифи то 70% — ҳозир харид кунед',
-    href: '/products',
+    title: 'Пешниҳодҳои махсус',
+    sub: 'Маҳсулоти интихобшуда бо нархи хуб',
+    href: '/products?hasDiscount=true',
     image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=75&auto=format&fit=crop',
   },
   {

@@ -15,10 +15,11 @@ interface ProductRailProps {
   icon?: 'star' | 'flash-sale' | 'new-arrival' | 'trending';
   fetchUrl: string;
   onAddToCart?: (product: Product) => void;
+  limit?: number;
 }
 
 export default function ProductRail({
-  title, subtitle, href, icon, fetchUrl, onAddToCart,
+  title, subtitle, href, icon, fetchUrl, onAddToCart, limit = 12,
 }: ProductRailProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ export default function ProductRail({
       .then((res) => {
         const data = res.data.data;
         const items = Array.isArray(data) ? data : data?.items;
-        setProducts(Array.isArray(items) ? items.slice(0, 12) : []);
+        setProducts(Array.isArray(items) ? items.slice(0, limit) : []);
       })
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));

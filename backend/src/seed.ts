@@ -397,8 +397,8 @@ async function seed() {
       const slug = getCategorySlugForName(name) || savedCategories[i % savedCategories.length].slug;
       const category = categoriesBySlug[slug] || savedCategories[0];
       const basePrice = 50 + ((i * 37) % 15000);
-      const hasDiscount = i % 4 === 0;
-      const discountPrice = hasDiscount ? Math.round(basePrice * 0.85) : undefined;
+      const hasDiscount = i % 12 === 0;
+      const discountPrice = hasDiscount ? Math.round(basePrice * 0.8) : undefined;
 
       batch.push(
         productRepo.create({
@@ -491,9 +491,49 @@ async function seed() {
   }
 
   await seedCms(AppDataSource);
+  await trimExcessiveDiscounts(AppDataSource);
+  await refreshCmsDealBanner(AppDataSource);
 
   await AppDataSource.destroy();
   console.log('🎉 Seeding complete!');
+}
+
+async function trimExcessiveDiscounts(dataSource: DataSource) {
+  const productRepo = dataSource.getRepository(Product);
+  const discounted = await productRepo
+    .createQueryBuilder('p')
+    .where('p.discountPrice IS NOT NULL')
+    .andWhere('p.discountPrice < p.price')
+    .getMany();
+
+  let removed = 0;
+  for (const p of discounted) {
+    const price = Number(p.price);
+    const discount = Number(p.discountPrice);
+    const pct = ((price - discount) / price) * 100;
+    const idSum = p.id.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+    const keep = idSum % 10 === 0 && pct >= 20;
+    if (!keep) {
+      await productRepo.update(p.id, { discountPrice: null as unknown as number });
+      removed++;
+    }
+  }
+  if (removed > 0) {
+    console.log(`✅ Trimmed ${removed} excessive discounts (kept ~10% with 20%+ off)`);
+  }
+}
+
+async function refreshCmsDealBanner(dataSource: DataSource) {
+  const bannerRepo = dataSource.getRepository(Banner);
+  const dealBanner = await bannerRepo.findOne({ where: { sortOrder: 0 } });
+  if (!dealBanner) return;
+  if (dealBanner.title.includes('скидки') || dealBanner.subtitle?.includes('%')) {
+    dealBanner.title = 'Пешниҳодҳои махсус';
+    dealBanner.subtitle = 'Маҳсулоти интихобшуда';
+    dealBanner.href = '/products?hasDiscount=true';
+    await bannerRepo.save(dealBanner);
+    console.log('✅ CMS deal banner text updated');
+  }
 }
 
 async function seedCms(dataSource: DataSource) {
@@ -503,7 +543,7 @@ async function seedCms(dataSource: DataSource) {
   const bannerCount = await bannerRepo.count();
   if (bannerCount === 0) {
     const banners = [
-      { title: 'Вот это скидки!', subtitle: 'Тахфифи то 70%', image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=75', href: '/products?hasDiscount=true', sortOrder: 0 },
+      { title: 'Пешниҳодҳои махсус', subtitle: 'Маҳсулоти интихобшуда', image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=75', href: '/products?hasDiscount=true', sortOrder: 0 },
       { title: 'Доставкаи ройгон', subtitle: 'Дар Душанбе', image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=75', href: '/products', sortOrder: 1 },
       { title: 'Мағозаҳои маҳаллӣ', subtitle: '1000+ маҳсулот', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=75', href: '/stores', sortOrder: 2 },
     ];

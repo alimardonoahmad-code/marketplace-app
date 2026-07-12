@@ -26,6 +26,10 @@ function ProductCard({
 }: ProductCardProps) {
   const { isWishlisted, toggle } = useWishlist();
   const hasDiscount = product.discountPrice && product.discountPrice < product.price;
+  const discountPercent = hasDiscount
+    ? getDiscountPercent(product.price, product.discountPrice!)
+    : 0;
+  const showDiscountBadge = hasDiscount && discountPercent >= 20;
   const inStock = product.stock > 0;
   const storeName = getStoreName(product.seller);
   const storeLocation = getStoreLocation(product.seller);
@@ -46,9 +50,9 @@ function ProductCard({
               className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
               sizes="(max-width: 768px) 50vw, 16vw"
             />
-            {hasDiscount && (
+            {showDiscountBadge && (
               <span className="absolute top-2 left-2 badge bg-accent text-white text-[10px] font-bold">
-                -{getDiscountPercent(product.price, product.discountPrice!)}%
+                -{discountPercent}%
               </span>
             )}
             <button
@@ -113,9 +117,9 @@ function ProductCard({
       >
         <div className="relative aspect-[4/3] lg:aspect-[3/2] overflow-hidden bg-surface-secondary">
           <AppImage src={getImageUrl(product.images?.[0])} alt={product.name} fill className="object-cover transition-transform duration-300 hover:scale-105" sizes="220px" />
-          {hasDiscount && (
+          {showDiscountBadge && (
             <span className="absolute top-2 left-2 badge bg-accent text-white shadow-soft flex items-center gap-1 text-[10px]">
-              -{getDiscountPercent(product.price, product.discountPrice!)}%
+              -{discountPercent}%
             </span>
           )}
           <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-2.5 pt-6">
@@ -179,9 +183,9 @@ function ProductCard({
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 768px) 50vw, 16vw"
           />
-          {hasDiscount && (
+          {showDiscountBadge && (
             <span className="absolute top-1.5 left-1.5 badge bg-accent text-white text-[10px] py-0">
-              -{getDiscountPercent(product.price, product.discountPrice!)}%
+              -{discountPercent}%
             </span>
           )}
           {product.category && (

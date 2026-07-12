@@ -6,7 +6,7 @@ const ITEMS = [
   { icon: 'truck' as const, title: 'Доставка ройгон', sub: 'Душанбе' },
   { icon: 'shield' as const, title: 'Пардохт бехатар', sub: 'Корт · Alif · нақд' },
   { icon: 'verified-seller' as const, title: '1000+ маҳсулот', sub: 'Тасдиқшуда' },
-  { icon: 'flash-sale' as const, title: 'Тахфифҳо', sub: 'То 50%' },
+  { icon: 'store' as const, title: 'Мағозаҳо', sub: 'Маҳаллӣ' },
 ];
 
 export default function TrustStrip() {

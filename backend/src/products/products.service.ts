@@ -89,6 +89,13 @@ export class ProductsService {
     if (hasDiscount) {
       qb.andWhere('product.discountPrice IS NOT NULL')
         .andWhere('product.discountPrice < product.price');
+
+      if (!isAdminOrSeller) {
+        qb.andWhere(
+          '(product.price - product.discountPrice) * 100.0 / NULLIF(product.price, 0) >= :minDiscountPct',
+          { minDiscountPct: 20 },
+        );
+      }
     }
 
     const allowedSortFields = ['createdAt', 'price', 'rating', 'name', 'reviewCount'];
