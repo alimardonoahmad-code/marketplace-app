@@ -133,30 +133,30 @@ function ProductsContent() {
   };
 
   return (
-    <div className="bg-surface-secondary dark:bg-surface-dark min-h-screen">
-      <div className="app-container py-4">
+    <div className="bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
+      <div className="app-container py-3 lg:py-4">
         {activeMeta && (
-          <div className="mb-4 flex items-center gap-3">
-            <div className="relative h-12 w-12 rounded-xl overflow-hidden shrink-0 border border-border/60">
+          <div className="mb-3 flex items-center gap-3 rounded-2xl bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark p-3 shadow-[0_2px_8px_rgba(0,26,52,0.04)]">
+            <div className="relative h-12 w-12 rounded-xl overflow-hidden shrink-0 border border-[#E8ECF2]">
               <img src={activeMeta.coverImage} alt="" className="h-full w-full object-cover" />
             </div>
             <div>
-              <h1 className="text-lg font-black text-text">{activeMeta.nameTj}</h1>
+              <h1 className="text-base font-black text-text">{activeMeta.nameTj}</h1>
               <p className="text-xs text-text-muted">{activeMeta.descTj}</p>
             </div>
           </div>
         )}
 
         {categories.length > 0 && (
-          <div className="flex items-center gap-2 mb-4">
-            <div className="flex gap-2 overflow-x-auto hide-scrollbar flex-1 pb-1">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="flex gap-1.5 overflow-x-auto hide-scrollbar flex-1 pb-0.5">
             <button
               type="button"
               onClick={() => selectCategory(null)}
-              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
+              className={`shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors ${
                 !filters.categoryId
-                  ? 'bg-primary text-white border-primary'
-                  : 'bg-white text-text-secondary border-border hover:border-primary/40'
+                  ? 'bg-primary text-white border-primary shadow-sm'
+                  : 'bg-white text-text-secondary border-[#E8ECF2] hover:border-primary/40 dark:bg-surface-dark-secondary dark:border-border-dark'
               }`}
             >
               Ҳама
@@ -169,10 +169,10 @@ function ProductsContent() {
                   key={cat.id}
                   type="button"
                   onClick={() => selectCategory(cat)}
-                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
+                  className={`shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors ${
                     active
-                      ? 'bg-primary text-white border-primary'
-                      : 'bg-white text-text-secondary border-border hover:border-primary/40'
+                      ? 'bg-primary text-white border-primary shadow-sm'
+                      : 'bg-white text-text-secondary border-[#E8ECF2] hover:border-primary/40 dark:bg-surface-dark-secondary dark:border-border-dark'
                   }`}
                 >
                   {meta.nameTj}
@@ -183,7 +183,11 @@ function ProductsContent() {
             <button
               type="button"
               onClick={() => setShowFilters(!showFilters)}
-              className="icon-box h-9 w-9 bg-white border border-border text-text-secondary shrink-0 rounded-full hover:bg-surface-secondary"
+              className={`icon-box h-10 w-10 shrink-0 rounded-xl border transition-colors ${
+                showFilters
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white border-[#E8ECF2] text-text-secondary hover:border-primary/40 dark:bg-surface-dark-secondary dark:border-border-dark'
+              }`}
               aria-label="Филтрҳо"
             >
               <SlidersHorizontal className="h-4 w-4" />
@@ -192,11 +196,11 @@ function ProductsContent() {
         )}
 
         {!categories.length && (
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-end mb-3">
             <button
               type="button"
               onClick={() => setShowFilters(!showFilters)}
-              className="icon-box h-9 w-9 bg-white border border-border text-text-secondary shrink-0 rounded-full hover:bg-surface-secondary"
+              className="icon-box h-10 w-10 bg-white border border-[#E8ECF2] text-text-secondary shrink-0 rounded-xl hover:border-primary/40"
               aria-label="Филтрҳо"
             >
               <SlidersHorizontal className="h-4 w-4" />
@@ -205,10 +209,10 @@ function ProductsContent() {
         )}
 
         {showFilters && (
-          <div className="card p-4 mb-4 animate-slide-up space-y-3">
+          <div className="rounded-2xl bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark p-4 mb-3 animate-slide-up space-y-3 shadow-[0_2px_12px_rgba(0,26,52,0.06)]">
             <div className="flex justify-between items-center">
-              <span className="font-bold text-sm">Филтрҳо</span>
-              <button type="button" onClick={() => setShowFilters(false)}><X className="h-4 w-4 text-gray-400" /></button>
+              <span className="font-bold text-sm text-text">Филтрҳо</span>
+              <button type="button" onClick={() => setShowFilters(false)} className="icon-box h-8 w-8 text-text-muted"><X className="h-4 w-4" /></button>
             </div>
             <select
               value={filters.categoryId}
@@ -228,6 +232,15 @@ function ProductsContent() {
               <input type="number" placeholder="Min смн" value={filters.minPrice} onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })} className="input" />
               <input type="number" placeholder="Max смн" value={filters.maxPrice} onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })} className="input" />
             </div>
+            <label className="flex items-center gap-2 text-sm font-medium text-text cursor-pointer">
+              <input
+                type="checkbox"
+                checked={filters.hasDiscount}
+                onChange={(e) => syncUrl({ ...filters, hasDiscount: e.target.checked }, 1)}
+                className="h-4 w-4 rounded border-[#E8ECF2] text-primary focus:ring-primary"
+              />
+              Танҳо бо тахфиф
+            </label>
             <select
               value={`${filters.sortBy}-${filters.sortOrder}`}
               onChange={(e) => {
@@ -241,21 +254,47 @@ function ProductsContent() {
               <option value="price-DESC">Грантарин</option>
               <option value="rating-DESC">Беҳтарин</option>
             </select>
+            <button
+              type="button"
+              onClick={() => syncUrl(filters, 1)}
+              className="btn-primary w-full py-2.5 text-sm"
+            >
+              Татбиқ кардан
+            </button>
           </div>
         )}
 
-        <p className="text-xs text-gray-500 mb-4 font-semibold">
-          {filters.hasDiscount ? 'Тахфифҳо: ' : ''}
-          {filters.search ? `«${filters.search}»: ` : ''}
-          {activeMeta ? `${activeMeta.nameTj}: ` : ''}{total} маҳсулот ёфт шуд
-        </p>
+        <div className="flex items-center justify-between mb-3 px-0.5">
+          <p className="text-xs text-text-muted font-semibold">
+            {filters.hasDiscount ? 'Тахфифҳо · ' : ''}
+            {filters.search ? `«${filters.search}» · ` : ''}
+            {activeMeta ? `${activeMeta.nameTj} · ` : ''}
+            <span className="text-text">{total}</span> маҳсулот
+          </p>
+          <select
+            value={`${filters.sortBy}-${filters.sortOrder}`}
+            onChange={(e) => {
+              const [sortBy, sortOrder] = e.target.value.split('-');
+              syncUrl({ ...filters, sortBy, sortOrder }, 1);
+            }}
+            className="text-xs font-bold text-primary bg-transparent border-none outline-none cursor-pointer"
+          >
+            <option value="createdAt-DESC">Навтарин</option>
+            <option value="price-ASC">Арзонтарин</option>
+            <option value="price-DESC">Грантарин</option>
+            <option value="rating-DESC">Беҳтарин</option>
+          </select>
+        </div>
 
         {loading ? (
           <ProductGridSkeleton count={12} />
         ) : products.length === 0 ? (
-          <div className="card p-12 text-center">
-            <Search className="h-12 w-12 text-gray-300 mx-auto" />
-            <p className="text-gray-500 mt-4">Маҳсулот ёфт нашуд</p>
+          <div className="rounded-2xl bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark p-12 text-center shadow-[0_2px_8px_rgba(0,26,52,0.04)]">
+            <Search className="h-12 w-12 text-[#C5CDD8] mx-auto" />
+            <p className="text-text-muted mt-4 font-medium">Маҳсулот ёфт нашуд</p>
+            <button type="button" onClick={() => selectCategory(null)} className="btn-primary mt-4 text-sm px-6">
+              Ҳама маҳсулот
+            </button>
           </div>
         ) : (
           <>
@@ -265,7 +304,7 @@ function ProductsContent() {
               ))}
             </div>
             {totalPages > 1 && (
-              <div className="flex justify-center gap-3 mt-8">
+              <div className="flex justify-center items-center gap-2 mt-8">
                 <button
                   type="button"
                   onClick={() => {
@@ -274,9 +313,9 @@ function ProductsContent() {
                     syncUrl(filters, next);
                   }}
                   disabled={page === 1}
-                  className="btn-secondary"
+                  className="h-10 w-10 rounded-xl bg-white border border-[#E8ECF2] text-text-secondary font-bold disabled:opacity-40 hover:border-primary hover:text-primary transition-colors"
                 >←</button>
-                <span className="flex items-center text-sm font-bold text-gray-600">{page}/{totalPages}</span>
+                <span className="flex items-center px-4 h-10 rounded-xl bg-white border border-[#E8ECF2] text-sm font-bold text-text">{page} / {totalPages}</span>
                 <button
                   type="button"
                   onClick={() => {
@@ -285,7 +324,7 @@ function ProductsContent() {
                     syncUrl(filters, next);
                   }}
                   disabled={page === totalPages}
-                  className="btn-secondary"
+                  className="h-10 w-10 rounded-xl bg-white border border-[#E8ECF2] text-text-secondary font-bold disabled:opacity-40 hover:border-primary hover:text-primary transition-colors"
                 >→</button>
               </div>
             )}
