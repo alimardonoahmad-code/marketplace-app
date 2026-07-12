@@ -37,37 +37,37 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#F5F7FA] p-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 text-white mb-4">
-            <Lock className="h-8 w-8" />
+        <div className="rounded-t-2xl py-8 px-6 text-center bg-gradient-to-r from-[#005BFF] via-[#0050E0] to-[#0047CC] text-white">
+          <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-white mb-3">
+            <Lock className="h-7 w-7" />
           </div>
           <h1 className="text-2xl font-black text-white">MARKET Admin</h1>
-          <p className="text-slate-400 text-sm mt-2">Панели идоракунии маркетплейс</p>
+          <p className="text-white/85 text-sm mt-1">Панели идоракунии маркетплейс</p>
         </div>
-        <form onSubmit={submit} className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-4 backdrop-blur">
+        <form onSubmit={submit} className="rounded-b-2xl border border-[#E8ECF2] border-t-0 bg-white p-6 space-y-4 shadow-[0_4px_24px_rgba(0,26,52,0.1)]">
           <div>
-            <label className="text-xs text-slate-400 mb-1 block">Email</label>
+            <label className="text-xs text-text-muted mb-1 block font-semibold">Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2.5 pl-10 pr-4 text-white text-sm" />
+                className="w-full rounded-xl border border-[#E8ECF2] bg-[#F5F7FA] py-2.5 pl-10 pr-4 text-text text-sm" />
             </div>
           </div>
           <div>
-            <label className="text-xs text-slate-400 mb-1 block">Парол</label>
+            <label className="text-xs text-text-muted mb-1 block font-semibold">Парол</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
               <input type={show ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} required
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2.5 pl-10 pr-12 text-white text-sm" />
-              <button type="button" onClick={() => setShow(!show)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
+                className="w-full rounded-xl border border-[#E8ECF2] bg-[#F5F7FA] py-2.5 pl-10 pr-12 text-text text-sm" />
+              <button type="button" onClick={() => setShow(!show)} className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted">
                 {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
           </div>
           <button type="submit" disabled={loading}
-            className="w-full rounded-xl bg-blue-600 py-2.5 text-white font-semibold hover:bg-blue-500 disabled:opacity-50">
+            className="w-full rounded-xl bg-[#005BFF] py-3 text-white font-bold hover:bg-[#0047CC] disabled:opacity-50">
             {loading ? 'Воридшавӣ...' : 'Ворид шудан'}
           </button>
         </form>

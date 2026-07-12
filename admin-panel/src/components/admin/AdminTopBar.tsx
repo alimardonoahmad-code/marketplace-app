@@ -7,7 +7,7 @@ export default function AdminTopBar() {
   const { user } = useAuthStore();
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-slate-200 bg-white/80 px-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80 lg:px-6">
+    <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b border-[#E8ECF2] bg-white/95 px-4 backdrop-blur dark:border-[#0D2D52] dark:bg-[#001A34]/95 lg:px-6">
       <div className="relative flex-1 max-w-md hidden sm:block">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
         <input

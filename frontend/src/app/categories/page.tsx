@@ -51,28 +51,26 @@ export default function CategoriesPage() {
   }, [categories, search]);
 
   return (
-    <div className="pb-8">
-      <div className="relative overflow-hidden bg-gradient-hero text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.12),transparent_55%)]" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/5 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
-        <div className="app-container relative py-6 lg:py-8">
+    <div className="bg-[#F5F7FA] dark:bg-surface-dark min-h-screen pb-8">
+      <div className="ozon-promo-bar">
+        <div className="app-container py-6 lg:py-8">
           <div className="max-w-xl">
             <div className="flex items-center gap-2 mb-2">
-              <LayoutGrid className="h-5 w-5" />
-              <span className="badge bg-white/15 text-white text-[10px]">PREMIUM MARKET</span>
+              <LayoutGrid className="h-5 w-5 text-white" />
+              <span className="badge bg-white/20 text-white text-[10px] font-bold">MARKET</span>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-black leading-tight">
+            <h1 className="text-2xl lg:text-3xl font-black leading-tight text-white">
               Категорияҳои маҳсулот
             </h1>
-            <p className="text-white/80 text-sm mt-2 leading-relaxed">
-              Ҳазорон маҳсулот аз мағозаҳои онлайн — интихоби васеъ барои ҳар завқ
+            <p className="text-white/85 text-sm mt-2 leading-relaxed">
+              Ҳазорон маҳсулот аз мағозаҳои онлайн
             </p>
             {!loading && (
               <div className="flex flex-wrap gap-2 mt-3">
-                <span className="badge bg-white/20 text-white backdrop-blur-sm text-[10px]">
+                <span className="badge bg-white/20 text-white text-[10px] font-bold">
                   {categories.length} категория
                 </span>
-                <span className="badge bg-white/20 text-white backdrop-blur-sm text-[10px]">
+                <span className="badge bg-white/20 text-white text-[10px] font-bold">
                   {totalProducts}+ маҳсулот
                 </span>
               </div>
@@ -86,15 +84,15 @@ export default function CategoriesPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Ҷустуҷӯи категория..."
-              className="input pl-11 h-11 bg-white/95 border-0 text-text shadow-float placeholder:text-text-muted w-full"
+              className="input pl-11 h-11 bg-white border-0 text-text shadow-[0_2px_12px_rgba(0,26,52,0.1)] placeholder:text-text-muted w-full rounded-xl"
             />
           </div>
         </div>
       </div>
 
-      <div className="app-container -mt-4 relative z-10 space-y-3">
+      <div className="app-container -mt-3 relative z-10 space-y-3 pt-1">
         {loading ? (
-          <div className="card px-3 py-4 bg-white shadow-card">
+          <div className="rounded-2xl px-3 py-4 bg-white border border-[#E8ECF2] shadow-[0_2px_8px_rgba(0,26,52,0.04)]">
             <div className="flex gap-3">
               {Array.from({ length: 5 }).map((_, i) => (
                 <div key={i} className="h-16 w-16 rounded-2xl shimmer-bg shrink-0" />
@@ -102,15 +100,15 @@ export default function CategoriesPage() {
             </div>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="card p-8 text-center bg-white shadow-card">
+          <div className="rounded-2xl p-8 text-center bg-white border border-[#E8ECF2] shadow-[0_2px_8px_rgba(0,26,52,0.04)]">
             <Sparkles className="h-10 w-10 text-text-muted mx-auto" />
             <p className="text-text-secondary mt-3 font-semibold">Категория ёфт нашуд</p>
-            <button type="button" onClick={() => setSearch('')} className="btn-ghost mt-3 text-sm">
+            <button type="button" onClick={() => setSearch('')} className="btn-primary mt-3 text-sm px-6">
               Пок кардан
             </button>
           </div>
         ) : (
-          <div className="card px-3 py-2.5 bg-white shadow-card">
+          <div className="rounded-2xl px-3 py-2.5 bg-white border border-[#E8ECF2] shadow-[0_2px_8px_rgba(0,26,52,0.04)]">
             <CategoryChipRow categories={filtered} />
           </div>
         )}
@@ -120,9 +118,9 @@ export default function CategoriesPage() {
             <Link
               key={href}
               href={href}
-              className="card p-3 flex items-center gap-2.5 card-hover bg-white dark:bg-surface-dark-secondary shadow-card"
+              className="rounded-2xl p-3 flex items-center gap-2.5 bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark shadow-[0_2px_8px_rgba(0,26,52,0.04)] hover:border-primary/30 transition-colors"
             >
-              <div className="icon-box h-9 w-9 icon-box-brand shrink-0">
+              <div className="icon-box h-9 w-9 bg-primary-50 text-primary shrink-0 rounded-xl">
                 <AppIcon name={icon} size="default" variant="primary" aria-hidden />
               </div>
               <span className="text-xs font-bold text-text dark:text-gray-200 truncate">{label}</span>
@@ -132,12 +130,12 @@ export default function CategoriesPage() {
       </div>
 
       <div className="app-container py-6">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-600 to-secondary-500 p-6 lg:p-8 text-white shadow-float">
+        <div className="relative overflow-hidden rounded-2xl bg-primary p-6 lg:p-8 text-white shadow-[0_4px_20px_rgba(0,91,255,0.25)]">
           <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/4" />
           <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h3 className="text-lg font-black">Ҳама маҳсулотро бинед</h3>
-              <p className="text-sm text-white/80 mt-1">Аз ҳамаи мағозаҳо дар як ҷо харид кунед</p>
+              <p className="text-sm text-white/85 mt-1">Аз ҳамаи мағозаҳо дар як ҷо харид кунед</p>
             </div>
             <Link href="/products" className="inline-flex items-center gap-2 bg-white text-primary rounded-xl px-5 h-11 text-sm font-bold hover:scale-[1.02] transition-transform shrink-0">
               Ба каталог <ArrowRight className="h-4 w-4" />

@@ -55,9 +55,9 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="pb-8">
-        <section className={clsx('relative overflow-hidden bg-gradient-to-br text-white py-10', BRAND.hero)}>
-          <div className="app-container relative text-center">
+      <div className="pb-8 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
+        <section className="ozon-promo-bar">
+          <div className="app-container relative py-10 text-center">
             <div className="icon-box h-20 w-20 bg-white/15 mx-auto rounded-2xl">
               <User className="h-10 w-10" />
             </div>
@@ -115,12 +115,9 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
       {/* Hero */}
-      <section className={clsx('relative overflow-hidden bg-gradient-to-br text-white', BRAND.heroLight)}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,255,255,0.18),transparent_55%)]" />
-        <div className="absolute -top-16 -right-16 w-64 h-64 bg-white/10 rounded-full blur-2xl" />
-
+      <section className="ozon-promo-bar">
         <div className="app-container relative py-8 lg:py-10">
           <div className="flex flex-col sm:flex-row sm:items-center gap-5">
             <div className="relative shrink-0">
@@ -163,7 +160,7 @@ export default function ProfilePage() {
             <Link
               key={href}
               href={href}
-              className="card p-3 flex flex-col items-center gap-2 card-hover shadow-card bg-white dark:bg-surface-dark-secondary group"
+              className="card p-3 flex flex-col items-center gap-2 card-hover shadow-[0_2px_8px_rgba(0,26,52,0.04)] bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark group"
             >
               <div className={clsx('icon-box h-10 w-10 rounded-xl group-hover:scale-110 transition-transform', BRAND.iconSoft)}>
                 <Icon className="h-5 w-5" />

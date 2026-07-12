@@ -51,22 +51,23 @@ export default function OrdersPage() {
   if (loading) return <div className="flex justify-center py-20"><div className="animate-spin h-8 w-8 border-4 border-brand-500 border-t-transparent rounded-full" /></div>;
 
   return (
-    <div className="app-container py-4">
-      <h1 className="text-xl font-black mb-1">Фармоишҳои ман</h1>
-      <p className="text-sm text-gray-500 mb-5">{orders.length} фармоиш</p>
+    <div className="bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
+    <div className="app-container py-3 lg:py-4">
+      <h1 className="text-lg font-black mb-0.5 text-text">Фармоишҳои ман</h1>
+      <p className="text-xs text-text-muted mb-4 font-semibold">{orders.length} фармоиш</p>
 
       {orders.length === 0 ? (
-        <div className="card p-12 text-center animate-fade-up">
-          <Package className="h-14 w-14 text-gray-300 mx-auto" />
-          <p className="font-bold mt-4">Фармоише нест</p>
-          <Link href="/products" className="btn-brand mt-4 inline-flex">Харид кунед</Link>
+        <div className="rounded-2xl bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark p-12 text-center animate-fade-up shadow-[0_2px_8px_rgba(0,26,52,0.04)]">
+          <Package className="h-14 w-14 text-[#C5CDD8] mx-auto" />
+          <p className="font-bold mt-4 text-text">Фармоише нест</p>
+          <Link href="/products" className="btn-primary mt-4 inline-flex px-6">Харид кунед</Link>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {orders.map((order, i) => {
             const st = statusConfig[order.status] || statusConfig.pending;
             return (
-              <Link key={order.id} href={`/orders/${order.id}`} className={clsx('card p-4 block card-hover opacity-0 animate-fade-up', `stagger-${Math.min(i + 1, 6)}`)}>
+              <Link key={order.id} href={`/orders/${order.id}`} className={clsx('rounded-2xl bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark p-4 block opacity-0 animate-fade-up hover:border-primary/30 transition-colors shadow-[0_2px_8px_rgba(0,26,52,0.04)]', `stagger-${Math.min(i + 1, 6)}`)}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="icon-box h-11 w-11 icon-box-brand">
@@ -98,6 +99,7 @@ export default function OrdersPage() {
           })}
         </div>
       )}
+    </div>
     </div>
   );
 }
