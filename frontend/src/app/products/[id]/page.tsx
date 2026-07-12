@@ -142,7 +142,7 @@ export default function ProductDetailPage() {
             <Plus className="h-4 w-4" />
           </button>
         </div>
-        <button type="button" onClick={handleAddToCart} className="btn-primary flex-1 py-3 text-sm">
+        <button type="button" onClick={handleAddToCart} className="btn-primary flex-1 py-3.5 text-sm font-bold rounded-xl">
           <ShoppingCart className="h-4 w-4" />
           Ба сабад — {formatPrice(Number(displayPrice) * quantity)}
         </button>
@@ -163,9 +163,9 @@ export default function ProductDetailPage() {
   );
 
   return (
-    <div className="pb-24 lg:pb-8">
-      <div className="app-container pt-4 pb-6">
-        <button type="button" onClick={() => router.back()} className="icon-box h-9 w-9 bg-white shadow-soft mb-4 dark:bg-surface-dark-secondary">
+    <div className="bg-[#F5F7FA] dark:bg-surface-dark min-h-screen pb-24 lg:pb-8">
+      <div className="app-container pt-3 pb-6">
+        <button type="button" onClick={() => router.back()} className="icon-box h-9 w-9 bg-white border border-[#E8ECF2] shadow-[0_2px_8px_rgba(0,26,52,0.04)] mb-3 dark:bg-surface-dark-secondary dark:border-border-dark">
           <ArrowLeft className="h-4 w-4" />
         </button>
 
@@ -173,7 +173,7 @@ export default function ProductDetailPage() {
         <div className="grid lg:grid-cols-[minmax(280px,380px)_1fr] xl:grid-cols-[400px_1fr] gap-6 lg:gap-10 items-start">
           {/* ── Image column ── */}
           <div className="lg:sticky lg:top-20">
-            <div className="relative aspect-square max-h-[320px] sm:max-h-[360px] lg:max-h-[380px] mx-auto w-full bg-surface-secondary rounded-2xl overflow-hidden shadow-card">
+            <div className="relative aspect-square max-h-[320px] sm:max-h-[360px] lg:max-h-[380px] mx-auto w-full bg-white rounded-2xl overflow-hidden border border-[#E8ECF2] dark:border-border-dark shadow-[0_2px_12px_rgba(0,26,52,0.06)]">
               <Image
                 src={getImageUrl(images[selectedImage])}
                 alt={product.name}
@@ -183,7 +183,7 @@ export default function ProductDetailPage() {
                 sizes="(max-width: 1024px) 320px, 400px"
               />
               {hasDiscount && (
-                <span className="absolute top-3 left-3 badge bg-gradient-gold text-white text-[10px] shadow-md flex items-center gap-1">
+                <span className="absolute top-3 left-3 badge bg-accent text-white text-[10px] font-bold shadow-md flex items-center gap-1">
                   <Zap className="h-3 w-3" /> -{getDiscountPercent(product.price, product.discountPrice!)}%
                 </span>
               )}
@@ -223,7 +223,7 @@ export default function ProductDetailPage() {
           </div>
 
           {/* ── Info column ── */}
-          <div className="space-y-4 animate-fade-up min-w-0">
+          <div className="space-y-4 animate-fade-up min-w-0 rounded-2xl bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark p-4 lg:p-5 shadow-[0_2px_12px_rgba(0,26,52,0.06)]">
             <div>
               {product.category && (
                 <span className="badge-brand text-[10px]">{catMeta?.nameTj || product.category.name}</span>
@@ -294,8 +294,8 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Description */}
-            <div className="card p-4">
-              <h2 className="text-sm font-bold mb-2">Тавсиф</h2>
+            <div className="rounded-2xl bg-[#F5F7FA] dark:bg-surface-dark border border-[#E8ECF2] dark:border-border-dark p-4">
+              <h2 className="text-sm font-bold mb-2 text-text">Тавсиф</h2>
               <p className="text-sm text-text-secondary leading-relaxed">{product.description}</p>
             </div>
 
@@ -462,7 +462,7 @@ export default function ProductDetailPage() {
 
       {/* Mobile fixed bottom bar */}
       {inStock && (
-        <div className="fixed bottom-[4.25rem] left-0 right-0 z-40 glass border-t border-border px-4 py-3 lg:hidden">
+        <div className="fixed bottom-[4.25rem] left-0 right-0 z-40 bg-white border-t border-[#E8ECF2] px-4 py-3 shadow-[0_-4px_20px_rgba(0,26,52,0.08)] lg:hidden dark:bg-surface-dark-secondary dark:border-border-dark">
           <CartActions />
         </div>
       )}
