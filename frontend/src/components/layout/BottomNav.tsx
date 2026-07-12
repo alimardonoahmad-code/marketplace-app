@@ -58,7 +58,7 @@ export default function BottomNav() {
     : shopNav;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 glass pb-[env(safe-area-inset-bottom,0px)] lg:hidden" aria-label="Навигатсияи асосӣ">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#E8ECF2] shadow-[0_-4px_20px_rgba(0,26,52,0.06)] pb-[env(safe-area-inset-bottom,0px)] lg:hidden dark:bg-surface-dark-secondary dark:border-border-dark" aria-label="Навигатсияи асосӣ">
       <div className="app-container">
         <div className="flex items-center justify-around h-[4rem]">
           {nav.map(({ href, icon, label, badge, accent }) => {
@@ -88,7 +88,10 @@ export default function BottomNav() {
                 href={href}
                 aria-label={label}
                 aria-current={active ? 'page' : undefined}
-                className="relative flex flex-col items-center justify-center gap-0.5 min-w-[3.25rem] py-1 transition-all duration-200 hover:scale-105 active:scale-95"
+                className={clsx(
+                  'relative flex flex-col items-center justify-center gap-0.5 min-w-[3.25rem] py-1 transition-all duration-200',
+                  active && 'ozon-nav-active',
+                )}
               >
                 {accent ? (
                   <div className="icon-box h-11 w-11 -mt-4 bg-gradient-nav text-white shadow-float rounded-card">

@@ -1,17 +1,32 @@
 {
-  "name": "LakMarket",
-  "short_name": "LakMarket",
-  "description": "Бозори онлайн — харид ва фурӯш",
+  "name": "Market — Маркетплейс",
+  "short_name": "Market",
+  "description": "Маркетплейси онлайн — харид ва фурӯш мисли Ozon",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#f8f7fc",
-  "theme_color": "#7c3aed",
   "orientation": "portrait-primary",
+  "background_color": "#F5F7FA",
+  "theme_color": "#005BFF",
+  "categories": ["shopping", "business"],
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

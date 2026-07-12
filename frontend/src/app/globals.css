@@ -88,8 +88,27 @@
   }
 
   .ozon-card {
-    @apply rounded-2xl bg-white border border-border/50 overflow-hidden transition-shadow duration-200
-      hover:shadow-card dark:bg-surface-dark-secondary dark:border-border-dark;
+    @apply rounded-2xl bg-white border border-[#E8ECF2] overflow-hidden transition-all duration-200
+      hover:shadow-[0_4px_20px_rgba(0,26,52,0.08)] hover:-translate-y-0.5
+      dark:bg-surface-dark-secondary dark:border-border-dark;
+  }
+
+  .ozon-promo-bar {
+    @apply bg-gradient-to-r from-primary via-primary-600 to-[#0047CC] text-white;
+  }
+
+  .ozon-install-banner {
+    @apply bg-white border-b border-border/60 shadow-soft;
+  }
+
+  .ozon-install-btn {
+    @apply inline-flex items-center gap-1.5 rounded-xl bg-primary px-3 py-2 text-xs font-bold text-white
+      hover:bg-primary-600 transition-colors;
+  }
+
+  .ozon-nav-active::before {
+    content: '';
+    @apply absolute top-0 left-1/2 -translate-x-1/2 h-0.5 w-8 rounded-full bg-primary;
   }
 
   .store-grid {

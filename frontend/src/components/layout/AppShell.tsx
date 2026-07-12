@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 import TopBar from './TopBar';
 import BottomNav from './BottomNav';
 import AuthSync from './AuthSync';
+import PwaRegister from '@/components/PwaRegister';
+import PwaInstallBanner from '@/components/PwaInstallBanner';
 import { WishlistProvider } from '@/hooks/useWishlist';
 import { useAppStore } from '@/store/auth';
 
@@ -60,8 +62,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <WishlistProvider>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-[#F5F7FA] dark:bg-surface-dark">
         <AuthSync />
+        <PwaRegister />
+        <PwaInstallBanner />
         <TopBar />
         <main className="flex-1 safe-bottom">{children}</main>
         <BottomNav />

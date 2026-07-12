@@ -11,17 +11,19 @@ const ITEMS = [
 
 export default function TrustStrip() {
   return (
-    <section className="app-container py-2">
-      <div className="flex gap-1.5 overflow-x-auto hide-scrollbar">
+    <section className="app-container py-2 lg:py-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {ITEMS.map((item) => (
           <div
             key={item.title}
-            className="flex items-center gap-2 shrink-0 px-3 py-2 rounded-xl bg-white dark:bg-surface-dark-secondary border border-border/40 shadow-soft"
+            className="flex items-center gap-2.5 px-3 py-3 rounded-2xl bg-white dark:bg-surface-dark-secondary border border-[#E8ECF2] dark:border-border-dark shadow-[0_2px_8px_rgba(0,26,52,0.04)]"
           >
-            <AppIcon name={item.icon} size="sm" variant="primary" aria-hidden />
+            <div className="h-9 w-9 rounded-xl bg-primary-50 flex items-center justify-center shrink-0">
+              <AppIcon name={item.icon} size="sm" variant="primary" aria-hidden />
+            </div>
             <div className="min-w-0">
-              <p className="text-[11px] font-bold text-text leading-tight whitespace-nowrap">{item.title}</p>
-              <p className="text-[9px] text-text-muted leading-tight whitespace-nowrap">{item.sub}</p>
+              <p className="text-[11px] font-bold text-text leading-tight">{item.title}</p>
+              <p className="text-[10px] text-text-muted leading-tight">{item.sub}</p>
             </div>
           </div>
         ))}

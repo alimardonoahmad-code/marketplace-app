@@ -44,7 +44,7 @@ export default function HomePage() {
   }, [user, router, setItemCount]);
 
   return (
-    <div className="pb-4 bg-surface-secondary dark:bg-surface-dark min-h-screen">
+    <div className="pb-4 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
       <HomeHero />
 
       <TrustStrip />

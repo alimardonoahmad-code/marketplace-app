@@ -29,7 +29,7 @@ export default function OzonSubNav() {
   };
 
   return (
-    <nav className="hidden sm:block border-t border-border/40 bg-white">
+    <nav className="border-t border-[#E8ECF2] bg-white dark:bg-surface-dark-secondary dark:border-border-dark">
       <div className="app-container">
         <ul className="flex items-center gap-1 overflow-x-auto hide-scrollbar py-2">
           {LINKS.map(({ href, label, icon: Icon }) => {
