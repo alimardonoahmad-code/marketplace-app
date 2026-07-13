@@ -10,22 +10,22 @@ export interface HomeBanner {
 export const HOME_BANNERS: HomeBanner[] = [
   {
     id: 'deals',
-    title: 'Пешниҳодҳои махсус',
-    sub: 'Маҳсулоти интихобшуда бо нархи хуб',
+    title: 'ТАХФИФИ КАЛОН',
+    sub: 'Маҳсулоти интихобшуда — нархи хуб',
     href: '/products?hasDiscount=true',
     image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&q=75&auto=format&fit=crop',
   },
   {
     id: 'delivery',
-    title: 'Доставкаи ройгон',
+    title: 'ДОСТАВКАИ РОЙГОН',
     sub: 'Барои фармоишҳои калон дар Душанбе',
     href: '/products',
     image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=75&auto=format&fit=crop',
   },
   {
     id: 'stores',
-    title: 'Мағозаҳои маҳаллӣ',
-    sub: '1000+ маҳсулот аз фурӯшандагони Тоҷикистон',
+    title: 'МАҒОЗАҲОИ МАҲАЛЛӢ',
+    sub: '1000+ маҳсулот аз Тоҷикистон',
     href: '/stores',
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=75&auto=format&fit=crop',
   },

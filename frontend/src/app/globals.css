@@ -50,8 +50,8 @@
 
   /* Ҷустуҷӯ мисли Ozon — фақат тугмаи 🔍 кабуд, дохил сафед */
   .ozon-search {
-    @apply flex items-stretch min-w-0 rounded-full bg-white border border-[#E0E4EB] overflow-hidden;
-    box-shadow: none;
+    @apply flex items-stretch min-w-0 rounded-2xl bg-white border border-[#E0E4EB] overflow-hidden;
+    box-shadow: 0 2px 8px rgba(0, 26, 52, 0.06);
   }
 
   .ozon-search:focus-within {
@@ -223,7 +223,7 @@
   }
 
   .app-chrome-top {
-    @apply fixed top-0 left-0 right-0 z-[100] bg-white dark:bg-surface-dark-secondary;
+    @apply fixed top-0 left-0 right-0 z-[100];
     padding-top: env(safe-area-inset-top, 0px);
     transform: translateZ(0);
     -webkit-transform: translateZ(0);

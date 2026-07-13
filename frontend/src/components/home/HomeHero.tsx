@@ -40,8 +40,8 @@ export default function HomeHero() {
   }, [bannerIdx]);
 
   return (
-    <section className="app-container pt-3 lg:pt-4">
-      <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-[#001A34] shadow-[0_8px_32px_rgba(0,91,255,0.15)]">
+    <section className="app-container pt-2 pb-1 lg:pt-4">
+      <div className="relative overflow-hidden rounded-2xl lg:rounded-3xl bg-[#001A34] shadow-[0_4px_16px_rgba(0,91,255,0.12)]">
         <Link
           href={banner.href}
           className="block relative min-h-[160px] sm:min-h-[200px] lg:min-h-[240px] overflow-hidden"
@@ -97,12 +97,12 @@ export default function HomeHero() {
           </div>
         </Link>
 
-        {/* Nav arrows */}
+        {/* Nav arrows — desktop/tablet */}
         <button
           type="button"
           onClick={(e) => { e.preventDefault(); prev(); }}
           aria-label="Пештар"
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 h-9 w-9 rounded-full bg-white/95 shadow-lg flex items-center justify-center text-text hover:bg-white hover:scale-105 active:scale-95 transition-all"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 h-9 w-9 rounded-full bg-white/95 shadow-lg hidden sm:flex items-center justify-center text-text hover:bg-white hover:scale-105 active:scale-95 transition-all"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -110,7 +110,7 @@ export default function HomeHero() {
           type="button"
           onClick={(e) => { e.preventDefault(); next(); }}
           aria-label="Бадтар"
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 h-9 w-9 rounded-full bg-white/95 shadow-lg flex items-center justify-center text-text hover:bg-white hover:scale-105 active:scale-95 transition-all"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 h-9 w-9 rounded-full bg-white/95 shadow-lg hidden sm:flex items-center justify-center text-text hover:bg-white hover:scale-105 active:scale-95 transition-all"
         >
           <ChevronRight className="h-5 w-5" />
         </button>

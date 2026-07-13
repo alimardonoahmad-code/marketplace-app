@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect, useRef, Suspense, type RefObject } from 'react';
-import { LayoutGrid, User, Package, Heart, ShoppingCart } from 'lucide-react';
+import { LayoutGrid, User, Package, Heart, ShoppingCart, MapPin, ChevronDown } from 'lucide-react';
 import clsx from 'clsx';
 import { useAuthStore, useCartStore, useAppStore } from '@/store/auth';
 import { getLoginUrl } from '@/lib/auth-utils';
@@ -126,65 +126,85 @@ function TopBarInner() {
   }
 
   return (
-    <header ref={headerRef} className="app-chrome-top border-b border-border/60 shadow-[0_1px_0_rgba(0,0,0,0.04)]">
-      <div className="hidden sm:block">
-        <OzonPromoBar />
-      </div>
-      <div className="app-container">
-        <div className="flex items-center gap-2 sm:gap-3 py-2 lg:py-2.5">
-          <OzonLogo />
-
-          <Link
-            href="/categories"
-            className="hidden sm:inline-flex items-center gap-2 bg-primary text-white rounded-xl px-4 h-11 text-sm font-bold hover:bg-primary-600 transition-colors shrink-0 shadow-[0_2px_8px_rgba(0,91,255,0.25)]"
-          >
-            <LayoutGrid className="h-5 w-5" strokeWidth={2} />
-            Каталог
-          </Link>
-
+    <header ref={headerRef} className="app-chrome-top shadow-[0_1px_0_rgba(0,0,0,0.04)]">
+      {/* Mobile — мисли Ozon */}
+      <div className="lg:hidden bg-primary">
+        <div className="app-container pt-2 pb-3">
+          <div className="flex items-center justify-between gap-3 mb-2.5">
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 text-white text-sm font-semibold"
+              aria-label="Шаҳр"
+            >
+              <MapPin className="h-4 w-4 shrink-0" />
+              <span>Душанбе</span>
+              <ChevronDown className="h-3.5 w-3.5 opacity-80" />
+            </button>
+            {user ? (
+              <Link
+                href="/profile"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#001A34] px-3.5 py-2 text-xs font-bold text-white"
+              >
+                <User className="h-3.5 w-3.5" />
+                {user.name.split(' ')[0]}
+              </Link>
+            ) : (
+              <Link
+                href={getLoginUrl('/')}
+                className="inline-flex items-center rounded-xl bg-[#001A34] px-4 py-2 text-xs font-bold text-white"
+              >
+                Ворид шавед
+              </Link>
+            )}
+          </div>
           <OzonSearch
             value={search}
             onChange={setSearch}
             onSubmit={onSearch}
             placeholder="Искать на Market"
-            className="hidden sm:block flex-1 max-w-3xl"
-          />
-
-          <div className="hidden lg:flex items-center gap-0.5 sm:gap-1 shrink-0 ml-auto">
-            <HeaderAction
-              href={user ? '/profile' : getLoginUrl('/profile')}
-              icon={User}
-              label={user ? 'Профил' : 'Ворид'}
-            />
-            {user && (
-              <HeaderAction href="/orders" icon={Package} label="Фармоиш" className="hidden md:flex" />
-            )}
-            <HeaderAction href="/wishlist" icon={Heart} label="Дӯст" />
-            <HeaderAction href="/cart" icon={ShoppingCart} label="Сабад" badge={itemCount} />
-          </div>
-        </div>
-
-        <div className="flex sm:hidden gap-2 pb-2">
-          <Link
-            href="/categories"
-            className="inline-flex items-center gap-1.5 bg-primary text-white rounded-xl px-3 h-10 text-xs font-bold shrink-0"
-          >
-            <LayoutGrid className="h-4 w-4" />
-            Каталог
-          </Link>
-          <OzonSearch
-            value={search}
-            onChange={setSearch}
-            onSubmit={onSearch}
-            placeholder="Ҷустуҷӯ..."
-            className="flex-1"
-            size="sm"
-            autocomplete={false}
+            className="w-full"
+            size="md"
+            showExtras
           />
         </div>
       </div>
 
-      <OzonSubNav className="hidden lg:block" />
+      {/* Desktop */}
+      <div className="hidden lg:block bg-white border-b border-border/60">
+        <OzonPromoBar />
+        <div className="app-container">
+          <div className="flex items-center gap-2 sm:gap-3 py-2 lg:py-2.5">
+            <OzonLogo />
+            <Link
+              href="/categories"
+              className="inline-flex items-center gap-2 bg-primary text-white rounded-xl px-4 h-11 text-sm font-bold hover:bg-primary-600 transition-colors shrink-0 shadow-[0_2px_8px_rgba(0,91,255,0.25)]"
+            >
+              <LayoutGrid className="h-5 w-5" strokeWidth={2} />
+              Каталог
+            </Link>
+            <OzonSearch
+              value={search}
+              onChange={setSearch}
+              onSubmit={onSearch}
+              placeholder="Искать на Market"
+              className="flex-1 max-w-3xl"
+            />
+            <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+              <HeaderAction
+                href={user ? '/profile' : getLoginUrl('/profile')}
+                icon={User}
+                label={user ? 'Профил' : 'Ворид'}
+              />
+              {user && (
+                <HeaderAction href="/orders" icon={Package} label="Фармоиш" className="hidden md:flex" />
+              )}
+              <HeaderAction href="/wishlist" icon={Heart} label="Дӯст" />
+              <HeaderAction href="/cart" icon={ShoppingCart} label="Сабад" badge={itemCount} />
+            </div>
+          </div>
+        </div>
+        <OzonSubNav />
+      </div>
     </header>
   );
 }

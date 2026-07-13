@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search } from 'lucide-react';
+import { Search, ScanLine, Camera } from 'lucide-react';
 import clsx from 'clsx';
 import api, { formatPrice, getImageUrl } from '@/lib/api';
 
@@ -24,6 +24,7 @@ interface OzonSearchProps {
   className?: string;
   size?: 'sm' | 'md';
   autocomplete?: boolean;
+  showExtras?: boolean;
 }
 
 export default function OzonSearch({
@@ -34,6 +35,7 @@ export default function OzonSearch({
   className,
   size = 'md',
   autocomplete = true,
+  showExtras = false,
 }: OzonSearchProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -87,9 +89,15 @@ export default function OzonSearch({
         onSubmit={handleSubmit}
         className={clsx(
           'ozon-search',
-          size === 'sm' ? 'h-10' : 'h-10 sm:h-11',
+          size === 'sm' ? 'h-10' : 'h-11 sm:h-12',
+          showExtras && 'rounded-2xl',
         )}
       >
+        {showExtras && (
+          <span className="pl-3 text-text-muted shrink-0">
+            <Search className="h-5 w-5" strokeWidth={2} />
+          </span>
+        )}
         <input
           type="text"
           value={value}
@@ -103,6 +111,16 @@ export default function OzonSearch({
           aria-label={placeholder}
           autoComplete="off"
         />
+        {showExtras && (
+          <div className="flex items-center gap-0.5 pr-1 shrink-0">
+            <button type="button" className="h-9 w-9 flex items-center justify-center text-text-muted" aria-label="Сканер">
+              <ScanLine className="h-5 w-5" />
+            </button>
+            <button type="button" className="h-9 w-9 flex items-center justify-center text-text-muted" aria-label="Камера">
+              <Camera className="h-5 w-5" />
+            </button>
+          </div>
+        )}
         <button type="submit" className="ozon-search-btn" aria-label="Ҷустуҷӯ">
           <Search className="h-5 w-5" strokeWidth={2.25} />
         </button>

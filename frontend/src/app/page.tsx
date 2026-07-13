@@ -1,14 +1,11 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
-import Link from 'next/link';
+import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
-import { Category } from '@/types';
 import HomeHero from '@/components/home/HomeHero';
-import TrustStrip from '@/components/home/TrustStrip';
-import ProductRail from '@/components/home/ProductRail';
-import { CategoryChipRow } from '@/components/categories/CategoryChip';
+import OzonQuickIcons from '@/components/home/OzonQuickIcons';
+import OzonProductFeed from '@/components/home/OzonProductFeed';
 import Footer from '@/components/layout/Footer';
 import { getLoginUrl } from '@/lib/auth-utils';
 import toast from 'react-hot-toast';
@@ -19,13 +16,6 @@ export default function HomePage() {
   const router = useRouter();
   const user = useAuthStore((s) => s.user);
   const setItemCount = useCartStore((s) => s.setItemCount);
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    api.get('/categories')
-      .then((res) => setCategories(Array.isArray(res.data?.data) ? res.data.data : []))
-      .catch(() => {});
-  }, []);
 
   const handleAddToCart = useCallback(async (product: Product) => {
     if (!user) {
@@ -44,54 +34,13 @@ export default function HomePage() {
   }, [user, router, setItemCount]);
 
   return (
-    <div className="pb-4 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
+    <div className="pb-2 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
       <HomeHero />
-
-      <TrustStrip />
-
-      {categories.length > 0 && (
-        <section className="app-container pt-4 pb-2">
-          <CategoryChipRow categories={categories} />
-        </section>
-      )}
-
-      <ProductRail
-        title="Тахфифҳои интихобшуда"
-        subtitle="Маҳсулоти махсус бо нархи хуб"
-        href="/products?hasDiscount=true"
-        icon="flash-sale"
-        fetchUrl="/products?hasDiscount=true&limit=8&sortBy=rating&sortOrder=DESC"
-        limit={6}
-        onAddToCart={handleAddToCart}
-      />
-
-      <ProductRail
-        title="Барои шумо"
-        subtitle="Маҳсулоти беҳтарин аз рейтинг"
-        href="/products?sortBy=rating&sortOrder=DESC"
-        icon="star"
-        fetchUrl="/products/recommended"
-        onAddToCart={handleAddToCart}
-      />
-
-      <ProductRail
-        title="Навтарин"
-        subtitle="Маҳсулоти нав ба маркетплейс"
-        href="/products?sortBy=createdAt&sortOrder=DESC"
-        icon="new-arrival"
-        fetchUrl="/products?limit=12&sortBy=createdAt&sortOrder=DESC"
-        onAddToCart={handleAddToCart}
-      />
-
-      <section className="app-container py-6">
-        <div className="text-center">
-          <Link href="/products" className="btn-outline-brand inline-flex px-10">
-            Ҳамаи 1000+ маҳсулот
-          </Link>
-        </div>
-      </section>
-
-      <Footer />
+      <OzonQuickIcons />
+      <OzonProductFeed onAddToCart={handleAddToCart} />
+      <div className="hidden lg:block">
+        <Footer />
+      </div>
     </div>
   );
 }
