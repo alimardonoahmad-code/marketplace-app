@@ -215,7 +215,7 @@
   }
 
   .safe-bottom {
-    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(3.75rem + env(safe-area-inset-bottom, 0px));
   }
 
   .app-main-with-header {
