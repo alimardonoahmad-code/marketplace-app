@@ -84,17 +84,16 @@ export default function OzonSearch({
   };
 
   return (
-    <div ref={wrapRef} className={clsx('relative', className)}>
+    <div ref={wrapRef} className={clsx('relative w-full', className)}>
       <form
         onSubmit={handleSubmit}
         className={clsx(
           'ozon-search',
-          size === 'sm' ? 'h-10' : 'h-11 sm:h-12',
-          showExtras && 'rounded-2xl',
+          showExtras ? 'ozon-search--mobile' : size === 'sm' ? 'h-10' : 'h-11 sm:h-12',
         )}
       >
         {showExtras && (
-          <span className="pl-3 text-text-muted shrink-0">
+          <span className="flex h-12 w-10 shrink-0 items-center justify-center text-[#9CA3AF]">
             <Search className="h-5 w-5" strokeWidth={2} />
           </span>
         )}
@@ -107,17 +106,28 @@ export default function OzonSearch({
           }}
           onFocus={() => setOpen(true)}
           placeholder={placeholder}
-          className="ozon-search-input"
+          className={clsx(
+            'ozon-search-input',
+            showExtras ? 'ozon-search-input--with-icon' : 'ozon-search-input--default',
+          )}
           aria-label={placeholder}
           autoComplete="off"
         />
         {showExtras && (
-          <div className="flex items-center gap-0.5 pr-1 shrink-0">
-            <button type="button" className="h-9 w-9 flex items-center justify-center text-text-muted" aria-label="Сканер">
-              <ScanLine className="h-5 w-5" />
+          <div className="flex shrink-0 items-center">
+            <button
+              type="button"
+              className="flex h-10 w-9 items-center justify-center text-[#9CA3AF]"
+              aria-label="Сканер"
+            >
+              <ScanLine className="h-5 w-5" strokeWidth={1.75} />
             </button>
-            <button type="button" className="h-9 w-9 flex items-center justify-center text-text-muted" aria-label="Камера">
-              <Camera className="h-5 w-5" />
+            <button
+              type="button"
+              className="flex h-10 w-9 items-center justify-center text-[#9CA3AF]"
+              aria-label="Камера"
+            >
+              <Camera className="h-5 w-5" strokeWidth={1.75} />
             </button>
           </div>
         )}

@@ -129,8 +129,8 @@ function TopBarInner() {
     <header ref={headerRef} className="app-chrome-top shadow-[0_1px_0_rgba(0,0,0,0.04)]">
       {/* Mobile — мисли Ozon */}
       <div className="lg:hidden bg-primary">
-        <div className="app-container pt-2 pb-3">
-          <div className="flex items-center justify-between gap-3 mb-2.5">
+        <div className="app-container pt-2.5 pb-3">
+          <div className="flex items-center justify-between gap-3 mb-3">
             <button
               type="button"
               className="inline-flex items-center gap-1 text-white text-sm font-semibold"
@@ -162,8 +162,6 @@ function TopBarInner() {
             onChange={setSearch}
             onSubmit={onSearch}
             placeholder="Искать на Market"
-            className="w-full"
-            size="md"
             showExtras
           />
         </div>
