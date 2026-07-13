@@ -12,7 +12,7 @@ const LINKS = [
   { href: '/sell', label: 'Фурӯш', icon: TrendingUp },
 ];
 
-export default function OzonSubNav() {
+export default function OzonSubNav({ className }: { className?: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -29,7 +29,7 @@ export default function OzonSubNav() {
   };
 
   return (
-    <nav className="border-t border-[#E8ECF2] bg-white dark:bg-surface-dark-secondary dark:border-border-dark">
+    <nav className={clsx('border-t border-[#E8ECF2] bg-white dark:bg-surface-dark-secondary dark:border-border-dark', className)}>
       <div className="app-container">
         <ul className="flex items-center gap-1 overflow-x-auto hide-scrollbar py-2">
           {LINKS.map(({ href, label, icon: Icon }) => {

@@ -70,8 +70,7 @@ export function getCategoryMeta(slug: string, fallbackName: string): CategoryMet
 }
 
 export const QUICK_LINKS: { href: string; label: string; icon: IconName }[] = [
-  { href: '/products?sortBy=createdAt', label: 'Навомадаҳо', icon: 'new-arrival' },
-  { href: '/products?sortBy=rating', label: 'Top Rated', icon: 'best-seller' },
-  { href: '/products', label: 'Тахфифҳо', icon: 'flash-sale' },
-  { href: '/stores', label: 'Мағозаҳо', icon: 'store' },
+  { href: '/products?hasDiscount=true', label: 'Тахфифҳо', icon: 'flash-sale' },
+  { href: '/products?sortBy=createdAt&sortOrder=DESC', label: 'Нав', icon: 'new-arrival' },
+  { href: '/sell', label: 'Фурӯш', icon: 'store' },
 ];

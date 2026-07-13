@@ -83,15 +83,6 @@ export default function HomePage() {
         onAddToCart={handleAddToCart}
       />
 
-      <ProductRail
-        title="Популярӣ"
-        subtitle="Зиёдтарин харидашуда"
-        href="/products?sortBy=reviewCount&sortOrder=DESC"
-        icon="trending"
-        fetchUrl="/products?limit=12&sortBy=reviewCount&sortOrder=DESC"
-        onAddToCart={handleAddToCart}
-      />
-
       <section className="app-container py-6">
         <div className="text-center">
           <Link href="/products" className="btn-outline-brand inline-flex px-10">

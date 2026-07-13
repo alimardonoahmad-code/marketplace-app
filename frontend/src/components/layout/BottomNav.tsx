@@ -31,8 +31,8 @@ export default function BottomNav() {
 
   const shopNav: NavItem[] = [
     { href: '/', icon: 'home', label: 'Асосӣ' },
+    { href: '/categories', icon: 'categories', label: 'Каталог' },
     { href: '/stores', icon: 'store', label: 'Мағозаҳо' },
-    { href: '/products', icon: 'search', label: 'Ҷустуҷӯ' },
     { href: '/cart', icon: 'cart', label: 'Сабад', badge: itemCount },
     { href: '/profile', icon: 'profile', label: 'Профил' },
   ];

@@ -150,7 +150,7 @@ function TopBarInner() {
             className="hidden sm:block flex-1 max-w-3xl"
           />
 
-          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0 ml-auto sm:ml-0">
+          <div className="hidden lg:flex items-center gap-0.5 sm:gap-1 shrink-0 ml-auto">
             <HeaderAction
               href={user ? '/profile' : getLoginUrl('/profile')}
               icon={User}
@@ -184,7 +184,7 @@ function TopBarInner() {
         </div>
       </div>
 
-      <OzonSubNav />
+      <OzonSubNav className="hidden lg:block" />
     </header>
   );
 }
