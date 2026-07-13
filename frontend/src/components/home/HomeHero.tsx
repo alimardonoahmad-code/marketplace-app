@@ -12,13 +12,11 @@ const AUTO_MS = 8000;
 export default function HomeHero() {
   const [bannerIdx, setBannerIdx] = useState(0);
   const [slideKey, setSlideKey] = useState(0);
-  const [progressKey, setProgressKey] = useState(0);
   const banner = HOME_BANNERS[bannerIdx];
 
   const goTo = useCallback((idx: number) => {
     setBannerIdx(idx);
     setSlideKey((k) => k + 1);
-    setProgressKey((k) => k + 1);
   }, []);
 
   const prev = () => goTo((bannerIdx - 1 + HOME_BANNERS.length) % HOME_BANNERS.length);
@@ -28,7 +26,6 @@ export default function HomeHero() {
     const t = setInterval(() => {
       setBannerIdx((i) => (i + 1) % HOME_BANNERS.length);
       setSlideKey((k) => k + 1);
-      setProgressKey((k) => k + 1);
     }, AUTO_MS);
     return () => clearInterval(t);
   }, []);
@@ -115,14 +112,9 @@ export default function HomeHero() {
           <ChevronRight className="h-5 w-5" />
         </button>
 
-        {/* Dots + progress bar */}
-        <div className="absolute bottom-0 inset-x-0 z-20">
-          <div
-            key={`progress-${progressKey}`}
-            className="h-0.5 origin-left bg-white/90 animate-hero-progress motion-reduce:hidden"
-            style={{ animationDuration: `${AUTO_MS}ms` }}
-          />
-          <div className="flex justify-center gap-1.5 py-2.5">
+        {/* Нуқтаҳо — бе хати progress */}
+        <div className="absolute bottom-0 inset-x-0 z-20 pb-2.5">
+          <div className="flex justify-center gap-1.5">
             {HOME_BANNERS.map((b, i) => (
               <button
                 key={b.id}
