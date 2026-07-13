@@ -168,6 +168,20 @@ module.exports = {
 
         'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
 
+        'hero-ken-burns': 'heroKenBurns 8s ease-out forwards',
+
+        'hero-title-in': 'heroTitleIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+
+        'hero-sub-in': 'heroSubIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards',
+
+        'hero-cta-in': 'heroCtaIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards',
+
+        'hero-badge-in': 'heroFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+
+        'hero-shine': 'heroShine 3s ease-in-out infinite',
+
+        'hero-progress': 'heroProgress 8s linear forwards',
+
       },
 
       keyframes: {
@@ -211,6 +225,66 @@ module.exports = {
           '0%, 100%': { opacity: '1' },
 
           '50%': { opacity: '0.88' },
+
+        },
+
+        heroKenBurns: {
+
+          '0%': { transform: 'scale(1) translate(0, 0)' },
+
+          '100%': { transform: 'scale(1.1) translate(-1.5%, -1%)' },
+
+        },
+
+        heroTitleIn: {
+
+          '0%': { opacity: '0', transform: 'translateX(-28px)' },
+
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+
+        },
+
+        heroSubIn: {
+
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+
+        },
+
+        heroCtaIn: {
+
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+
+        },
+
+        heroFadeUp: {
+
+          '0%': { opacity: '0', transform: 'translateY(8px)' },
+
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+
+        },
+
+        heroShine: {
+
+          '0%, 100%': { transform: 'translateX(-120%) skewX(-12deg)', opacity: '0' },
+
+          '45%': { opacity: '0.35' },
+
+          '55%': { opacity: '0.2' },
+
+          '100%': { transform: 'translateX(220%) skewX(-12deg)', opacity: '0' },
+
+        },
+
+        heroProgress: {
+
+          '0%': { transform: 'scaleX(0)' },
+
+          '100%': { transform: 'scaleX(1)' },
 
         },
 
