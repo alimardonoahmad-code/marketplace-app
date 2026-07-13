@@ -20,6 +20,7 @@ import { ChatModule } from './chat/chat.module';
 import { SellerModule } from './seller/seller.module';
 import { PaymentsModule } from './payments/payments.module';
 import { CouponsModule } from './coupons/coupons.module';
+import { CommonModule } from './common/common.module';
 import {
   User,
   Category,
@@ -136,6 +137,7 @@ const ALL_ENTITIES = [
     SellerModule,
     PaymentsModule,
     CouponsModule,
+    CommonModule,
   ],
   providers: [
     { provide: APP_GUARD, useClass: JwtAuthGuard },

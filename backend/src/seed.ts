@@ -15,6 +15,13 @@ import { Banner } from './entities/banner.entity';
 import { FaqItem } from './entities/faq.entity';
 import { UserRole, ProductStatus } from './common/enums';
 import { getCategorySlugForName, getImageForProductName } from './common/product-images';
+import {
+  priceFromCategory,
+  roundSomoni,
+  adjustPricesToDushanbeMarket,
+  applyCuratedPrices,
+  repriceLakMarketProducts,
+} from './common/dushanbe-prices';
 
 config();
 
@@ -203,8 +210,8 @@ async function seed() {
     {
       name: 'iPhone 15 Pro',
       description: 'Latest Apple iPhone with A17 Pro chip, titanium design, and advanced camera system.',
-      price: 12500,
-      discountPrice: 11200,
+      price: 8500,
+      discountPrice: 7600,
       stock: 50,
       categoryId: savedCategories[0].id,
       images: ['https://picsum.photos/seed/iphone/400/400'],
@@ -214,7 +221,7 @@ async function seed() {
     {
       name: 'Samsung Galaxy S24',
       description: 'Premium Android smartphone with AI features and stunning display.',
-      price: 10800,
+      price: 7300,
       stock: 35,
       categoryId: savedCategories[0].id,
       images: ['https://picsum.photos/seed/samsung/400/400'],
@@ -224,8 +231,8 @@ async function seed() {
     {
       name: 'MacBook Air M3',
       description: 'Ultra-thin laptop with M3 chip, 18-hour battery life.',
-      price: 15200,
-      discountPrice: 13900,
+      price: 10300,
+      discountPrice: 9400,
       stock: 20,
       categoryId: savedCategories[0].id,
       images: ['https://picsum.photos/seed/macbook/400/400'],
@@ -235,7 +242,7 @@ async function seed() {
     {
       name: 'Nike Air Max 90',
       description: 'Classic Nike sneakers with Air cushioning technology.',
-      price: 850,
+      price: 580,
       stock: 100,
       categoryId: savedCategories[1].id,
       images: ['https://picsum.photos/seed/nike/400/400'],
@@ -245,8 +252,8 @@ async function seed() {
     {
       name: "Levi's 501 Jeans",
       description: 'Original fit jeans, timeless style and comfort.',
-      price: 520,
-      discountPrice: 390,
+      price: 350,
+      discountPrice: 265,
       stock: 200,
       categoryId: savedCategories[1].id,
       images: ['https://picsum.photos/seed/jeans/400/400'],
@@ -256,7 +263,7 @@ async function seed() {
     {
       name: 'Modern Sofa',
       description: 'Comfortable 3-seater sofa with premium fabric upholstery.',
-      price: 4800,
+      price: 3200,
       stock: 15,
       categoryId: savedCategories[2].id,
       images: ['https://picsum.photos/seed/sofa/400/400'],
@@ -266,7 +273,7 @@ async function seed() {
     {
       name: 'Yoga Mat Pro',
       description: 'Non-slip yoga mat with carrying strap, 6mm thickness.',
-      price: 120,
+      price: 80,
       stock: 150,
       categoryId: savedCategories[3].id,
       images: ['https://picsum.photos/seed/yoga/400/400'],
@@ -276,7 +283,7 @@ async function seed() {
     {
       name: 'The Great Gatsby',
       description: 'Classic American novel by F. Scott Fitzgerald.',
-      price: 45,
+      price: 30,
       stock: 500,
       categoryId: savedCategories[4].id,
       images: ['https://picsum.photos/seed/book/400/400'],
@@ -304,12 +311,12 @@ async function seed() {
   }
 
   const sellerProducts = [
-    { name: 'Summer Dress', description: 'Light cotton dress for summer.', price: 280, stock: 80, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/dress/400/400'], rating: 4.4, reviewCount: 56 },
-    { name: 'Winter Jacket', description: 'Warm jacket for cold season.', price: 650, discountPrice: 520, stock: 40, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/jacket/400/400'], rating: 4.6, reviewCount: 34 },
-    { name: 'Coffee Table', description: 'Modern wooden coffee table.', price: 1850, stock: 25, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/table/400/400'], rating: 4.5, reviewCount: 21 },
-    { name: 'Desk Lamp', description: 'LED desk lamp with adjustable brightness.', price: 180, stock: 60, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/lamp/400/400'], rating: 4.3, reviewCount: 18 },
-    { name: 'Football Ball', description: 'Professional size 5 football.', price: 150, stock: 120, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/football/400/400'], rating: 4.7, reviewCount: 67 },
-    { name: 'Dumbbells Set', description: 'Adjustable dumbbells 2x10kg.', price: 720, stock: 30, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/dumbbells/400/400'], rating: 4.8, reviewCount: 42 },
+    { name: 'Summer Dress', description: 'Light cotton dress for summer.', price: 190, stock: 80, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/dress/400/400'], rating: 4.4, reviewCount: 56 },
+    { name: 'Winter Jacket', description: 'Warm jacket for cold season.', price: 440, discountPrice: 350, stock: 40, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/jacket/400/400'], rating: 4.6, reviewCount: 34 },
+    { name: 'Coffee Table', description: 'Modern wooden coffee table.', price: 1250, stock: 25, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/table/400/400'], rating: 4.5, reviewCount: 21 },
+    { name: 'Desk Lamp', description: 'LED desk lamp with adjustable brightness.', price: 120, stock: 60, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/lamp/400/400'], rating: 4.3, reviewCount: 18 },
+    { name: 'Football Ball', description: 'Professional size 5 football.', price: 100, stock: 120, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/football/400/400'], rating: 4.7, reviewCount: 67 },
+    { name: 'Dumbbells Set', description: 'Adjustable dumbbells 2x10kg.', price: 490, stock: 30, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/dumbbells/400/400'], rating: 4.8, reviewCount: 42 },
   ];
 
   for (const prod of sellerProducts) {
@@ -335,27 +342,33 @@ async function seed() {
   console.log(`✅ ${products.length + sellerProducts.length} products created`);
 
   const moreProducts = [
-    { name: 'iPad Air', description: 'Tablet for work and study.', price: 8900, stock: 25, categoryIdx: 0, sellerIdx: 0, images: ['https://picsum.photos/seed/ipad/400/400'], rating: 4.7, reviewCount: 88 },
-    { name: 'Bluetooth Speaker', description: 'Portable speaker with deep bass.', price: 420, stock: 70, categoryIdx: 0, sellerIdx: 0, images: ['https://picsum.photos/seed/speaker/400/400'], rating: 4.4, reviewCount: 45 },
-    { name: 'Smart Watch', description: 'Fitness tracker and notifications.', price: 980, discountPrice: 850, stock: 55, categoryIdx: 0, sellerIdx: 0, images: ['https://picsum.photos/seed/watch/400/400'], rating: 4.5, reviewCount: 62 },
-    { name: 'Cotton T-Shirt', description: 'Soft everyday t-shirt.', price: 120, stock: 200, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/tshirt/400/400'], rating: 4.2, reviewCount: 90 },
-    { name: 'Sneakers Classic', description: 'Comfortable casual sneakers.', price: 480, stock: 90, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/sneakers/400/400'], rating: 4.6, reviewCount: 77 },
-    { name: 'Leather Belt', description: 'Genuine leather belt.', price: 180, stock: 60, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/belt/400/400'], rating: 4.3, reviewCount: 33 },
-    { name: 'Dining Chair', description: 'Ergonomic dining chair.', price: 950, stock: 40, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/chair/400/400'], rating: 4.4, reviewCount: 28 },
-    { name: 'Wall Clock', description: 'Modern wall clock.', price: 140, stock: 80, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/clock/400/400'], rating: 4.1, reviewCount: 19 },
-    { name: 'Plant Pot Set', description: 'Ceramic pots for home garden.', price: 95, stock: 100, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/pots/400/400'], rating: 4.5, reviewCount: 41 },
-    { name: 'Running Shoes', description: 'Lightweight running shoes.', price: 620, stock: 65, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/running/400/400'], rating: 4.7, reviewCount: 54 },
-    { name: 'Tennis Racket', description: 'Professional tennis racket.', price: 380, stock: 35, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/tennis/400/400'], rating: 4.6, reviewCount: 29 },
-    { name: 'Fitness Gloves', description: 'Gym training gloves.', price: 75, stock: 120, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/gloves/400/400'], rating: 4.4, reviewCount: 38 },
-    { name: 'Tajik Poetry Book', description: 'Classic Tajik literature.', price: 55, stock: 150, categoryIdx: 4, sellerIdx: 0, images: ['https://picsum.photos/seed/poetry/400/400'], rating: 4.9, reviewCount: 210 },
-    { name: 'English Dictionary', description: 'English-Tajik dictionary.', price: 85, stock: 200, categoryIdx: 4, sellerIdx: 0, images: ['https://picsum.photos/seed/dictionary/400/400'], rating: 4.7, reviewCount: 145 },
-    { name: 'Children Story Book', description: 'Illustrated stories for kids.', price: 40, stock: 300, categoryIdx: 4, sellerIdx: 0, images: ['https://picsum.photos/seed/kidsbook/400/400'], rating: 4.8, reviewCount: 320 },
+    { name: 'iPad Air', description: 'Tablet for work and study.', price: 6000, stock: 25, categoryIdx: 0, sellerIdx: 0, images: ['https://picsum.photos/seed/ipad/400/400'], rating: 4.7, reviewCount: 88 },
+    { name: 'Bluetooth Speaker', description: 'Portable speaker with deep bass.', price: 285, stock: 70, categoryIdx: 0, sellerIdx: 0, images: ['https://picsum.photos/seed/speaker/400/400'], rating: 4.4, reviewCount: 45 },
+    { name: 'Smart Watch', description: 'Fitness tracker and notifications.', price: 650, discountPrice: 560, stock: 55, categoryIdx: 0, sellerIdx: 0, images: ['https://picsum.photos/seed/watch/400/400'], rating: 4.5, reviewCount: 62 },
+    { name: 'Cotton T-Shirt', description: 'Soft everyday t-shirt.', price: 80, stock: 200, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/tshirt/400/400'], rating: 4.2, reviewCount: 90 },
+    { name: 'Sneakers Classic', description: 'Comfortable casual sneakers.', price: 320, stock: 90, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/sneakers/400/400'], rating: 4.6, reviewCount: 77 },
+    { name: 'Leather Belt', description: 'Genuine leather belt.', price: 120, stock: 60, categoryIdx: 1, sellerIdx: 1, images: ['https://picsum.photos/seed/belt/400/400'], rating: 4.3, reviewCount: 33 },
+    { name: 'Dining Chair', description: 'Ergonomic dining chair.', price: 640, stock: 40, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/chair/400/400'], rating: 4.4, reviewCount: 28 },
+    { name: 'Wall Clock', description: 'Modern wall clock.', price: 95, stock: 80, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/clock/400/400'], rating: 4.1, reviewCount: 19 },
+    { name: 'Plant Pot Set', description: 'Ceramic pots for home garden.', price: 65, stock: 100, categoryIdx: 2, sellerIdx: 2, images: ['https://picsum.photos/seed/pots/400/400'], rating: 4.5, reviewCount: 41 },
+    { name: 'Running Shoes', description: 'Lightweight running shoes.', price: 420, stock: 65, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/running/400/400'], rating: 4.7, reviewCount: 54 },
+    { name: 'Tennis Racket', description: 'Professional tennis racket.', price: 260, stock: 35, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/tennis/400/400'], rating: 4.6, reviewCount: 29 },
+    { name: 'Fitness Gloves', description: 'Gym training gloves.', price: 50, stock: 120, categoryIdx: 3, sellerIdx: 3, images: ['https://picsum.photos/seed/gloves/400/400'], rating: 4.4, reviewCount: 38 },
+    { name: 'Tajik Poetry Book', description: 'Classic Tajik literature.', price: 38, stock: 150, categoryIdx: 4, sellerIdx: 0, images: ['https://picsum.photos/seed/poetry/400/400'], rating: 4.9, reviewCount: 210 },
+    { name: 'English Dictionary', description: 'English-Tajik dictionary.', price: 58, stock: 200, categoryIdx: 4, sellerIdx: 0, images: ['https://picsum.photos/seed/dictionary/400/400'], rating: 4.7, reviewCount: 145 },
+    { name: 'Children Story Book', description: 'Illustrated stories for kids.', price: 28, stock: 300, categoryIdx: 4, sellerIdx: 0, images: ['https://picsum.photos/seed/kidsbook/400/400'], rating: 4.8, reviewCount: 320 },
   ];
 
   for (const prod of moreProducts) {
     const existing = await productRepo.findOne({ where: { name: prod.name } });
     const targetSeller = savedSellers[prod.sellerIdx];
-    if (!existing && targetSeller) {
+    if (existing) {
+      Object.assign(existing, {
+        price: prod.price,
+        discountPrice: prod.discountPrice ?? null,
+      });
+      await productRepo.save(existing);
+    } else if (targetSeller) {
       const { categoryIdx, sellerIdx, ...data } = prod;
       const product = productRepo.create({
         ...data,
@@ -396,9 +409,9 @@ async function seed() {
       const name = `${prefix} LakMarket #${num}`;
       const slug = getCategorySlugForName(name) || savedCategories[i % savedCategories.length].slug;
       const category = categoriesBySlug[slug] || savedCategories[0];
-      const basePrice = 50 + ((i * 37) % 15000);
+      const basePrice = priceFromCategory(slug, num * 37 + i);
       const hasDiscount = i % 12 === 0;
-      const discountPrice = hasDiscount ? Math.round(basePrice * 0.8) : undefined;
+      const discountPrice = hasDiscount ? roundSomoni(basePrice * 0.8) : undefined;
 
       batch.push(
         productRepo.create({
@@ -489,6 +502,13 @@ async function seed() {
     }
     console.log('✅ Legacy USD prices converted to somoni');
   }
+
+  const adjusted = await adjustPricesToDushanbeMarket(productRepo, orderRepo, orderItemRepo);
+  if (adjusted > 0) console.log(`✅ Adjusted ${adjusted} product prices for Dushanbe market`);
+  const lak = await repriceLakMarketProducts(productRepo, savedCategories);
+  if (lak > 0) console.log(`✅ Repriced ${lak} LakMarket products for Dushanbe`);
+  const curated = await applyCuratedPrices(productRepo);
+  if (curated > 0) console.log(`✅ Curated prices updated for ${curated} products`);
 
   await seedCms(AppDataSource);
   await trimExcessiveDiscounts(AppDataSource);
