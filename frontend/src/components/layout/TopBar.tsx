@@ -131,19 +131,25 @@ function TopBarInner() {
       <div className="lg:hidden bg-primary">
         <div className="app-container pt-2.5 pb-3">
           <div className="flex items-center justify-between gap-3 mb-3">
-            <button
-              type="button"
-              className="inline-flex items-center gap-1 text-white text-sm font-semibold"
-              aria-label="Шаҳр"
-            >
-              <MapPin className="h-4 w-4 shrink-0" />
-              <span>Душанбе</span>
-              <ChevronDown className="h-3.5 w-3.5 opacity-80" />
-            </button>
+            <div className="flex items-center gap-2 min-w-0">
+              <Link href="/" className="shrink-0 h-9 w-9 rounded-xl bg-white overflow-hidden border border-white/30" aria-label="Marketplace">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/brand/market-logo.png" alt="Marketplace" className="h-full w-full object-contain p-0.5" />
+              </Link>
+              <button
+                type="button"
+                className="inline-flex items-center gap-1 text-white text-sm font-semibold min-w-0"
+                aria-label="Шаҳр"
+              >
+                <MapPin className="h-4 w-4 shrink-0" />
+                <span className="truncate">Душанбе</span>
+                <ChevronDown className="h-3.5 w-3.5 opacity-80 shrink-0" />
+              </button>
+            </div>
             {user ? (
               <Link
                 href="/profile"
-                className="inline-flex items-center gap-1.5 rounded-xl bg-[#001A34] px-3.5 py-2 text-xs font-bold text-white"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-[#001A34] px-3.5 py-2 text-xs font-bold text-white shrink-0"
               >
                 <User className="h-3.5 w-3.5" />
                 {user.name.split(' ')[0]}
@@ -151,7 +157,7 @@ function TopBarInner() {
             ) : (
               <Link
                 href={getLoginUrl('/')}
-                className="inline-flex items-center rounded-xl bg-[#001A34] px-4 py-2 text-xs font-bold text-white"
+                className="inline-flex items-center rounded-xl bg-[#001A34] px-4 py-2 text-xs font-bold text-white shrink-0"
               >
                 Ворид шавед
               </Link>

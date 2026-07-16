@@ -1,15 +1,21 @@
 {
-  "name": "Market — Маркетплейс",
-  "short_name": "Market",
-  "description": "Маркетплейси онлайн — харид ва фурӯш мисли Ozon",
+  "name": "Marketplace",
+  "short_name": "Marketplace",
+  "description": "Маркетплейси онлайн — харид ва фурӯш",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#F5F7FA",
+  "background_color": "#FFFFFF",
   "theme_color": "#005BFF",
   "categories": ["shopping", "business"],
   "icons": [
+    {
+      "src": "/brand/market-logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icon-192.png",
       "sizes": "192x192",

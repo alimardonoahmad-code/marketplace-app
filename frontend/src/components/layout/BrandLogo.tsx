@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 
@@ -8,45 +7,41 @@ interface BrandLogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'hero';
   href?: string | null;
-  priority?: boolean;
 }
 
 const SIZES = {
-  sm: { box: 'h-9 w-9', img: 36 },
-  md: { box: 'h-11 w-11', img: 44 },
-  lg: { box: 'h-16 w-16', img: 64 },
-  hero: { box: 'h-28 w-28 sm:h-32 sm:w-32', img: 128 },
+  sm: 'h-10 w-10',
+  md: 'h-12 w-12',
+  lg: 'h-20 w-20',
+  hero: 'h-36 w-36 sm:h-44 sm:w-44 lg:h-52 lg:w-52',
 };
 
 export default function BrandLogo({
   className,
   size = 'md',
   href = '/',
-  priority = false,
 }: BrandLogoProps) {
-  const s = SIZES[size];
   const content = (
     <span
       className={clsx(
-        'relative inline-flex items-center justify-center overflow-hidden rounded-2xl bg-white shadow-[0_2px_10px_rgba(0,26,52,0.08)] border border-white/80 shrink-0',
-        s.box,
+        'relative inline-flex items-center justify-center overflow-hidden rounded-2xl bg-white shadow-[0_4px_16px_rgba(0,26,52,0.12)] border border-white shrink-0',
+        SIZES[size],
         className,
       )}
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src="/brand/market-logo.png"
         alt="Marketplace"
-        width={s.img}
-        height={s.img}
-        className="object-contain p-1.5"
-        priority={priority}
+        className="h-full w-full object-contain p-2 sm:p-3"
+        decoding="async"
       />
     </span>
   );
 
   if (href === null) return content;
   return (
-    <Link href={href} className="inline-flex shrink-0 group" aria-label="Marketplace">
+    <Link href={href} className="inline-flex shrink-0" aria-label="Marketplace">
       {content}
     </Link>
   );

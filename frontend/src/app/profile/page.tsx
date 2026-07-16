@@ -59,8 +59,11 @@ export default function ProfilePage() {
       <div className="pb-8 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
         <section className="ozon-promo-bar">
           <div className="app-container relative py-10 text-center">
-            <div className="mx-auto flex justify-center">
-              <BrandLogo size="hero" href="/" priority />
+            <div className="mx-auto flex flex-col items-center justify-center gap-3">
+              <BrandLogo size="hero" href="/" />
+              <p className="text-white/90 text-xs font-semibold tracking-wide uppercase">
+                Marketplace
+              </p>
             </div>
             <h1 className="text-2xl font-black mt-4">Меҳмон</h1>
             <p className="text-white/80 text-sm mt-2 max-w-sm mx-auto">
@@ -120,9 +123,9 @@ export default function ProfilePage() {
       {/* Hero */}
       <section className="ozon-promo-bar">
         <div className="app-container relative py-8 lg:py-10">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+          <div className="flex flex-col items-center sm:flex-row sm:items-center gap-5">
             <div className="relative shrink-0">
-              <BrandLogo size="hero" href={null} priority />
+              <BrandLogo size="hero" href={null} />
               {userIsSeller && (
                 <span className="absolute -bottom-1 -right-1 h-7 w-7 rounded-full bg-white flex items-center justify-center shadow-soft">
                   <BadgeCheck className="h-4 w-4 text-success" />
@@ -130,12 +133,12 @@ export default function ProfilePage() {
               )}
             </div>
 
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 text-center sm:text-left">
               <span className="badge bg-white/20 text-white text-[10px] backdrop-blur-sm">
                 {ROLE_LABELS[user.role] || user.role}
               </span>
               <h1 className="text-2xl lg:text-3xl font-black mt-2 truncate">{user.name}</h1>
-              <p className="text-white/85 text-sm flex items-center gap-1.5 mt-1 truncate">
+              <p className="text-white/85 text-sm flex items-center justify-center sm:justify-start gap-1.5 mt-1 truncate">
                 <Mail className="h-3.5 w-3.5 shrink-0" /> {user.email}
               </p>
             </div>
@@ -143,7 +146,7 @@ export default function ProfilePage() {
             <button
               type="button"
               onClick={() => setEditMode(!editMode)}
-              className="shrink-0 inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/25 rounded-xl px-4 h-10 text-sm font-semibold transition-colors self-start sm:self-center"
+              className="shrink-0 inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/25 rounded-xl px-4 h-10 text-sm font-semibold transition-colors self-center sm:self-center"
             >
               <Settings className="h-4 w-4" />
               {editMode ? 'Бекор' : 'Таҳрир'}
