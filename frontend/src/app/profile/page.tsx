@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {
   LogOut, Package, Heart, Settings, Store, ShoppingBag,
   Shield, ChevronRight, Bell, MessageCircle, Moon, Sun, Monitor,
-  MapPin, Mail, Phone, BadgeCheck, Sparkles, Save, User,
+  MapPin, Mail, Phone, BadgeCheck, Sparkles, Save,
 } from 'lucide-react';
 import clsx from 'clsx';
 import api from '@/lib/api';
@@ -15,6 +15,7 @@ import { useThemeStore, applyTheme, ThemeMode } from '@/store/theme';
 import { getStoreLocation, getStoreName } from '@/lib/store-utils';
 import { isSeller, getLoginUrl, getRegisterUrl } from '@/lib/auth-utils';
 import { BRAND } from '@/lib/brand-theme';
+import BrandLogo from '@/components/layout/BrandLogo';
 import toast from 'react-hot-toast';
 
 const ROLE_LABELS: Record<string, string> = {
@@ -58,8 +59,8 @@ export default function ProfilePage() {
       <div className="pb-8 bg-[#F5F7FA] dark:bg-surface-dark min-h-screen">
         <section className="ozon-promo-bar">
           <div className="app-container relative py-10 text-center">
-            <div className="icon-box h-20 w-20 bg-white/15 mx-auto rounded-2xl">
-              <User className="h-10 w-10" />
+            <div className="mx-auto flex justify-center">
+              <BrandLogo size="hero" href="/" priority />
             </div>
             <h1 className="text-2xl font-black mt-4">Меҳмон</h1>
             <p className="text-white/80 text-sm mt-2 max-w-sm mx-auto">
@@ -121,9 +122,7 @@ export default function ProfilePage() {
         <div className="app-container relative py-8 lg:py-10">
           <div className="flex flex-col sm:flex-row sm:items-center gap-5">
             <div className="relative shrink-0">
-              <div className="h-20 w-20 lg:h-24 lg:w-24 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-3xl lg:text-4xl font-black shadow-float border-2 border-white/30">
-                {user.name.charAt(0).toUpperCase()}
-              </div>
+              <BrandLogo size="hero" href={null} priority />
               {userIsSeller && (
                 <span className="absolute -bottom-1 -right-1 h-7 w-7 rounded-full bg-white flex items-center justify-center shadow-soft">
                   <BadgeCheck className="h-4 w-4 text-success" />
