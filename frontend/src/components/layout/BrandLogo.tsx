@@ -15,7 +15,7 @@ const SIZES = {
   sm: { box: 'h-9 w-9', img: 36 },
   md: { box: 'h-11 w-11', img: 44 },
   lg: { box: 'h-16 w-16', img: 64 },
-  hero: { box: 'h-24 w-24 sm:h-28 sm:w-28', img: 112 },
+  hero: { box: 'h-28 w-28 sm:h-32 sm:w-32', img: 128 },
 };
 
 export default function BrandLogo({
@@ -38,7 +38,7 @@ export default function BrandLogo({
         alt="Marketplace"
         width={s.img}
         height={s.img}
-        className="object-contain p-1"
+        className="object-contain p-1.5"
         priority={priority}
       />
     </span>
